@@ -340,6 +340,25 @@ export default function LandingPage() {
 
   return (
     <div className="relative min-h-[100dvh] bg-[#FAF7F2] text-[#1C1917] flex flex-col font-sans selection:bg-[#B8754F] selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'Ovichem Consult Ltd',
+            description:
+              'Fumigation services, water treatment, and fumigative chemical supply for homes and businesses.',
+            areaServed: ['Warri', 'Delta State', 'Nigeria'],
+            serviceType: [
+              'Fumigation services',
+              'Pest control',
+              'Water treatment',
+              'Fumigative chemical supply',
+            ],
+          }),
+        }}
+      />
       
       {/* 1. ADAPTIVE FIXED NAVIGATION HEADER */}
       <header
@@ -407,16 +426,6 @@ export default function LandingPage() {
               Services
             </a>
             <a
-              href="#gallery"
-              className={`transition-colors ${
-                isScrolled
-                  ? 'text-[#443E38] hover:text-[#B8754F]'
-                  : 'text-white/90 hover:text-[#F2B694] drop-shadow-sm'
-              }`}
-            >
-              Fieldwork &amp; Products
-            </a>
-            <a
               href="#about"
               className={`transition-colors ${
                 isScrolled
@@ -424,17 +433,7 @@ export default function LandingPage() {
                   : 'text-white/90 hover:text-[#F2B694] drop-shadow-sm'
               }`}
             >
-              About Us
-            </a>
-            <a
-              href="#process"
-              className={`transition-colors ${
-                isScrolled
-                  ? 'text-[#443E38] hover:text-[#B8754F]'
-                  : 'text-white/90 hover:text-[#F2B694] drop-shadow-sm'
-              }`}
-            >
-              Process
+              Why Ovichem
             </a>
             <a
               href="#faq"
@@ -444,17 +443,7 @@ export default function LandingPage() {
                   : 'text-white/90 hover:text-[#F2B694] drop-shadow-sm'
               }`}
             >
-              FAQ
-            </a>
-            <a
-              href="#contact"
-              className={`transition-colors ${
-                isScrolled
-                  ? 'text-[#443E38] hover:text-[#B8754F]'
-                  : 'text-white/90 hover:text-[#F2B694] drop-shadow-sm'
-              }`}
-            >
-              Contact
+              Common Questions
             </a>
           </nav>
 
@@ -467,7 +456,7 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-[#A65E32] hover:bg-[#8F4E26] text-white text-sm font-normal px-6 py-2.5 rounded-full shadow-md shadow-black/25 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
-              <span>Book same-day pest control</span>
+              <span>Request a quote</span>
             </a>
           </div>
 
@@ -514,17 +503,6 @@ export default function LandingPage() {
                   Services
                 </a>
                 <a
-                  href="#gallery"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2 rounded-lg transition-colors ${
-                    isScrolled
-                      ? 'hover:bg-black/5 text-[#1C1917]'
-                      : 'hover:bg-white/10 text-white'
-                  }`}
-                >
-                  Fieldwork &amp; Products
-                </a>
-                <a
                   href="#about"
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-3 py-2 rounded-lg transition-colors ${
@@ -533,18 +511,7 @@ export default function LandingPage() {
                       : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  About Us
-                </a>
-                <a
-                  href="#process"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2 rounded-lg transition-colors ${
-                    isScrolled
-                      ? 'hover:bg-black/5 text-[#1C1917]'
-                      : 'hover:bg-white/10 text-white'
-                  }`}
-                >
-                  Process
+                  Why Ovichem
                 </a>
                 <a
                   href="#faq"
@@ -555,18 +522,7 @@ export default function LandingPage() {
                       : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  FAQ
-                </a>
-                <a
-                  href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2 rounded-lg transition-colors ${
-                    isScrolled
-                      ? 'hover:bg-black/5 text-[#1C1917]'
-                      : 'hover:bg-white/10 text-white'
-                  }`}
-                >
-                  Contact
+                  Common Questions
                 </a>
               </div>
 
@@ -582,7 +538,7 @@ export default function LandingPage() {
                   className="w-full text-center bg-[#A65E32] text-white font-medium py-3 rounded-full flex items-center justify-center gap-2 text-sm"
                 >
                   <MessageCircle className="w-4 h-4 fill-current" />
-                  Book same-day pest control
+                  Request a quote
                 </a>
               </div>
             </motion.div>
@@ -625,7 +581,7 @@ export default function LandingPage() {
                 <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
               </div>
               <span className="text-xs sm:text-sm font-normal text-[#F2ECE4] tracking-wide ml-1">
-                1769 satisfied clients
+                Fumigation, water treatment &amp; chemical supply
               </span>
             </motion.div>
 
@@ -637,8 +593,8 @@ export default function LandingPage() {
               id="hero-main-title"
               className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-serif-display text-[#FAF7F2] leading-[1.03] tracking-tight drop-shadow-sm font-normal"
             >
-              Long-term pest control <br className="hidden sm:inline" />
-              for high-value properties
+              Fumigation, water treatment <br className="hidden sm:inline" />
+              &amp; chemicals for homes and businesses
             </motion.h1>
 
             {/* Strategic Subtitle */}
@@ -649,8 +605,8 @@ export default function LandingPage() {
               id="hero-subtitle"
               className="text-sm sm:text-base md:text-lg text-[#EAE3DB] font-normal leading-relaxed max-w-2xl pt-1 drop-shadow-sm"
             >
-              Get professional pest inspections, same-day fumigation, and guaranteed
-              treatment plans tailored to high-end residential and commercial properties.
+              Ovichem Consult helps homes, offices, estates, facilities, and marine operators
+              deal with pests, improve water quality, and source the right treatment chemicals.
             </motion.p>
 
             {/* Dual CTA Buttons */}
@@ -668,7 +624,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#A65E32] hover:bg-[#8F4E26] text-[#FAF7F2] text-sm sm:text-base font-normal px-7 py-3.5 sm:px-8 sm:py-3.5 rounded-full shadow-md shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
               >
-                <span>Book same-day pest control</span>
+                <span>Get a fumigation quote</span>
               </a>
 
               <a
@@ -678,7 +634,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-[#3D2D22]/40 hover:bg-[#3D2D22]/65 text-[#FAF7F2] border border-white/40 hover:border-white/60 text-sm sm:text-base font-normal px-7 py-3.5 sm:px-8 sm:py-3.5 rounded-full backdrop-blur-sm transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
               >
-                <span>WhatsApp Us now</span>
+                <span>Talk to a treatment specialist</span>
               </a>
             </motion.div>
 
@@ -701,90 +657,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 3. RECOGNIZED ACROSS RESIDENTIAL & COMMERCIAL INDUSTRIES */}
+      {/* 3. SERVICES SECTION */}
       <section
-        id="industries-strip"
-        className="py-16 sm:py-24 bg-[#FAF7F2] border-b border-[#E8DFC0]/50"
+        id="services"
+        className="py-24 sm:py-32 bg-[#F6F1EA] border-b border-[#E8DFC0]/60"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl space-y-4 mb-12 sm:mb-16">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display text-[#1C1917] tracking-tight leading-[1.08]">
-              Recognized across residential &amp; <br className="hidden sm:inline" />
-              commercial industries
-            </h2>
-            <p className="text-sm sm:text-base text-[#6B645C] leading-relaxed max-w-2xl">
-              From residential estates to large-scale commercial operations, our services are trusted across multiple industries and featured in leading publications.
-            </p>
-          </div>
-
-          <div
-            id="industry-logos-row"
-            className="w-full flex items-center justify-between gap-6 sm:gap-10 overflow-x-auto no-scrollbar py-4 opacity-75 grayscale hover:grayscale-0 transition-all duration-300"
-          >
-            <div className="flex-shrink-0 flex items-center text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <span className="font-extrabold tracking-tighter text-2xl sm:text-3xl font-mono uppercase lowercase">
-                oipsum<span className="text-xs align-top font-bold">®</span>
-              </span>
-            </div>
-
-            <div className="flex-shrink-0 flex items-center text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <svg className="w-8 h-8 sm:w-10 sm:h-10 fill-none stroke-current stroke-[1.5]" viewBox="0 0 40 40">
-                <circle cx="20" cy="14" r="8" opacity="0.8" />
-                <circle cx="20" cy="26" r="8" opacity="0.8" />
-                <circle cx="14" cy="20" r="8" opacity="0.8" />
-                <circle cx="26" cy="20" r="8" opacity="0.8" />
-                <circle cx="15.5" cy="15.5" r="8" opacity="0.6" />
-                <circle cx="24.5" cy="24.5" r="8" opacity="0.6" />
-              </svg>
-            </div>
-
-            <div className="flex-shrink-0 flex items-center gap-2 text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-none stroke-current stroke-[1.7]" viewBox="0 0 36 36">
-                <circle cx="18" cy="12" r="7" opacity="0.8" />
-                <circle cx="18" cy="24" r="7" opacity="0.8" />
-                <circle cx="12" cy="18" r="7" opacity="0.8" />
-                <circle cx="24" cy="18" r="7" opacity="0.8" />
-              </svg>
-              <span className="font-bold text-lg sm:text-xl tracking-tight">Logoipsum<span className="text-[10px] align-super font-semibold">®</span></span>
-            </div>
-
-            <div className="flex-shrink-0 flex items-center text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-current p-1.5 flex items-center justify-center">
-                <div className="w-full h-full rounded-full bg-[#FAF7F2] flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 rounded-full bg-current" />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex-shrink-0 flex items-center gap-2 text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <svg className="w-9 h-7 sm:w-11 sm:h-8 fill-none stroke-current stroke-[2.2]" viewBox="0 0 44 32">
-                <rect x="2" y="2" width="22" height="28" rx="11" />
-                <rect x="18" y="2" width="24" height="28" rx="11" />
-                <path d="M13 16h18" />
-              </svg>
-              <span className="font-black text-lg sm:text-xl tracking-wider uppercase font-mono">LGPSIVI<span className="text-[10px] align-super font-semibold">®</span></span>
-            </div>
-
-            <div className="flex-shrink-0 flex items-center text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <svg className="w-8 h-8 sm:w-9 sm:h-9 fill-current" viewBox="0 0 36 36">
-                <path d="M18 2C9.16 2 2 9.16 2 18s7.16 16 16 16 16-7.16 16-16S26.84 2 18 2zm0 4c5.52 0 10.15 3.75 11.59 8.82L15.35 14.82 9.5 8.97C11.83 6.94 14.77 6 18 6zm0 24c-5.52 0-10.15-3.75-11.59-8.82l14.24-.01 5.85 5.85C24.17 29.06 21.23 30 18 30z" />
-              </svg>
-            </div>
-
-            <div className="flex-shrink-0 flex items-center gap-2 text-[#554D46] hover:text-[#1C1917] transition-colors">
-              <svg className="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="3.5" />
-                <path d="M18 2c-1.5 4-4 6.5-8 8 4 1.5 6.5 4 8 8 1.5-4 4-6.5 8-8-4-1.5-6.5-4-8-8z" opacity="0.9" />
-                <path d="M7 7c2 3.5 5 4.5 8 5-3 .5-6 1.5-8 5-2-3.5-2-6.5 0-10zm22 0c2 3.5 2 6.5 0 10-2-3.5-5-4.5-8-5 3-.5 6-1.5 8-5z" opacity="0.7" />
-              </svg>
-              <span className="font-bold text-lg sm:text-xl tracking-tight">Logoipsum</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. OUR SERVICES SECTION */}
-      <section id="services" className="py-24 sm:py-32 bg-[#F6F1EA] border-b border-[#E8DFC0]/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16">
@@ -793,7 +670,7 @@ export default function LandingPage() {
                 Our services
               </div>
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#1C1917] tracking-tight leading-[1.08]">
-                Professional pest control &amp; treatment services for homes &amp; businesses
+                Practical treatment services for homes &amp; businesses
               </h2>
             </div>
 
@@ -1016,13 +893,13 @@ export default function LandingPage() {
                 <span>Fieldwork, Products &amp; Expertise</span>
               </div>
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#1C1917] tracking-tight leading-[1.08]">
-                Proven fieldwork in action, certified products &amp; technical diagnostics
+                See our work, products &amp; technical expertise
               </h2>
             </div>
 
             <div className="lg:col-span-5 space-y-5 lg:pl-6">
               <p className="text-sm sm:text-base text-[#6B645C] leading-relaxed">
-                Take a closer look at our live property treatments across the Niger Delta, our certified chemical concentrates, and precision water diagnostics laboratory testing.
+                See how we approach property treatments, chemical supply, and water testing across Warri and the Niger Delta.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <a
@@ -1345,7 +1222,7 @@ export default function LandingPage() {
               </div>
 
               <h2 className="text-3xl sm:text-5xl font-serif-display text-[#1C1917] tracking-tight leading-[1.1]">
-                Trusted pest control built around safety, speed &amp; long-term protection
+                Straight answers, careful treatment, lasting protection
               </h2>
 
               <p className="text-sm sm:text-base text-[#6B645C] leading-relaxed">
@@ -1417,7 +1294,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#A65E32] hover:bg-[#8F4E26] text-white text-sm font-normal px-8 py-3.5 rounded-full shadow-md shadow-black/15 transition-all"
               >
-                <span>Book same-day pest control</span>
+                <span>Request treatment advice</span>
               </a>
             </div>
           </div>
@@ -1467,7 +1344,7 @@ export default function LandingPage() {
               Our process
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#1C1917] tracking-tight">
-              Our Simple Pest Control Process
+              How our treatment process works
             </h2>
             <div className="pt-2">
               <a
@@ -1476,7 +1353,7 @@ export default function LandingPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#A65E32] hover:bg-[#8F4E26] text-white text-sm font-normal px-8 py-3.5 rounded-full shadow-md shadow-black/15 transition-all"
               >
-                <span>Book same-day pest control</span>
+                <span>Request a quote</span>
               </a>
             </div>
           </div>
@@ -1688,13 +1565,13 @@ export default function LandingPage() {
                   <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
                 </div>
                 <span className="text-xs sm:text-sm font-normal text-[#F2ECE4] tracking-wide ml-1">
-                  1769 satisfied clients
+                  Fumigation, water treatment &amp; chemical supply
                 </span>
               </div>
 
               {/* Main Headline */}
               <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif-display text-[#FAF7F2] leading-[1.05] tracking-tight font-normal max-w-2xl drop-shadow-sm">
-                Emergency pest control when you need fast help
+                Need help with pests, water, or treatment chemicals?
               </h2>
 
               {/* Subtitle */}
@@ -1925,7 +1802,7 @@ export default function LandingPage() {
               </a>
 
               <p className="text-xs sm:text-sm text-[#6B645C] leading-relaxed max-w-sm">
-                Professional pest control and fumigation services for residential and commercial properties. Trusted for termite treatment, rodent removal, bed bug extermination, and emergency pest control.
+                Fumigation services, water treatment, and fumigative chemical supply for residential, commercial, and marine clients in Warri and across Delta State.
               </p>
             </div>
 
@@ -1942,7 +1819,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a href="#about" className="hover:text-[#B8754F] transition-colors">
-                    About Us
+                    Why Ovichem
                   </a>
                 </li>
                 <li>
@@ -1957,12 +1834,12 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a href="#faq" className="hover:text-[#B8754F] transition-colors">
-                    FAQ
+                    Common Questions
                   </a>
                 </li>
                 <li>
                   <a href="#contact" className="hover:text-[#B8754F] transition-colors">
-                    Contact page
+                    Get a Quote
                   </a>
                 </li>
                 <li>
@@ -2040,7 +1917,7 @@ export default function LandingPage() {
             {/* Col 4: Contact Us (Exact Match to Image 3) */}
             <div className="md:col-span-3 space-y-4">
               <h4 className="text-xl font-serif-display font-medium text-[#1C1917]">
-                Contact Us
+                Get in touch
               </h4>
               <div className="space-y-2.5 text-xs sm:text-sm text-[#6B645C]">
                 <p>

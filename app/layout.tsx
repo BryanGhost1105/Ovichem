@@ -17,14 +17,22 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Ovichem Consult Ltd | Practical Space & Chemical Treatment Specialists',
+  title: 'Ovichem Consult Ltd | Fumigation, Water Treatment & Chemicals in Warri',
   description:
-    'Warri-based practical treatment specialists with around a decade of experience in fumigation, drinking water treatment, and chemical supplies across residential, commercial, and marine environments.',
+    'Ovichem Consult provides fumigation services, water treatment, and fumigative chemical supplies for homes and businesses in Warri, Delta State, and beyond.',
+  keywords: [
+    'fumigation services in Warri',
+    'pest control Delta State',
+    'water treatment Warri',
+    'fumigation chemicals Nigeria',
+    'chemical supply Warri',
+  ],
   openGraph: {
-    title: 'Ovichem Consult Ltd | When Your Space Needs Treatment, Experience Matters',
+    title: 'Ovichem Consult Ltd | Fumigation, Water Treatment & Chemicals in Warri',
     description:
-      'Fumigation, drinking water treatment, and chemical supplies in Warri, Delta State and beyond. Practical, experienced, and trusted.',
+      'Fumigation services, water treatment, and professional chemical supplies for homes and businesses in Warri, Delta State, and beyond.',
     type: 'website',
+    siteName: 'Ovichem Consult Ltd',
   },
 };
 
