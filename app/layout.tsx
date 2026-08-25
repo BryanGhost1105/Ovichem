@@ -17,9 +17,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Ovichem Consult Ltd | Fumigation, Water Treatment & Chemicals in Warri',
+  title: 'Ovichem Consult Ltd | Chemical, Environmental & Engineering Services',
   description:
-    'Ovichem Consult provides fumigation services, water treatment, and fumigative chemical supplies for homes and businesses in Warri, Delta State, and beyond.',
+    'Ovichem Consult Limited provides quality chemicals, environmental services, water treatment, and engineering support from Effurun-Warri, Delta State.',
   keywords: [
     'fumigation services in Warri',
     'pest control Delta State',
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     'chemical supply Warri',
   ],
   openGraph: {
-    title: 'Ovichem Consult Ltd | Fumigation, Water Treatment & Chemicals in Warri',
+    title: 'Ovichem Consult Ltd | Chemical, Environmental & Engineering Services',
     description:
-      'Fumigation services, water treatment, and professional chemical supplies for homes and businesses in Warri, Delta State, and beyond.',
+      'Quality chemicals, environmental services, water treatment, and engineering support from Effurun-Warri, Delta State.',
     type: 'website',
     siteName: 'Ovichem Consult Ltd',
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`scroll-smooth ${instrumentSerif.variable} ${plusJakarta.variable}`}>
-      <body className="font-sans antialiased text-[#1A1816] bg-[#FAF7F2] min-h-[100dvh] selection:bg-[#B8754F] selection:text-white" suppressHydrationWarning>
+      <body className="font-sans antialiased text-primary-700 bg-white min-h-[100dvh] selection:bg-primary-700 selection:text-white" suppressHydrationWarning>
         {children}
       </body>
     </html>

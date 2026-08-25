@@ -2,16 +2,17 @@
 
 @layer base {
   :root {
-    --color-primary: #B8754F;
-    --color-accent: #9B5F3F;
+    --color-primary: #06042D;
+    --color-secondary: #990909;
+    --color-accent: #E4980B;
     --color-surface-cream: #FAF7F2;
     --color-surface-sand: #F3ECE2;
-    --color-surface-dark: #121418;
+    --color-surface-dark: #06042D;
   }
 
   body {
     font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-    color: #1c1917;
+    color: #06042D;
     background-color: #FAF7F2;
   }
 
@@ -30,9 +31,9 @@
   background: #FAF7F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8CFC4;
+  background: #D8D0C0;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8754F;
+  background: #E4980B;
 }
