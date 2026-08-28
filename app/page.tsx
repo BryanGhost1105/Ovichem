@@ -60,6 +60,69 @@ export default function LandingPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [mobileMenuOpen]);
+
+  const navigateToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    event.preventDefault();
+    setMobileMenuOpen(false);
+
+    const scrollToSection = () => {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+
+      const headerHeight = document.getElementById('main-navigation-header')?.getBoundingClientRect().height ?? 0;
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY - headerHeight;
+      window.history.pushState(null, '', `#${sectionId}`);
+      window.scrollTo({ top: Math.max(0, sectionTop), behavior: 'smooth' });
+    };
+
+    const navigationDelay = mobileMenuOpen ? 350 : 0;
+    window.setTimeout(() => {
+      requestAnimationFrame(() => requestAnimationFrame(scrollToSection));
+    }, navigationDelay);
+  };
+
+  useEffect(() => {
+    const scrollToCurrentHash = () => {
+      const sectionId = window.location.hash.slice(1);
+      if (!sectionId) return;
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+
+        const headerHeight = document.getElementById('main-navigation-header')?.getBoundingClientRect().height ?? 0;
+        window.scrollTo({
+          top: Math.max(0, section.getBoundingClientRect().top + window.scrollY - headerHeight),
+          behavior: 'auto',
+        });
+      }));
+    };
+
+    window.addEventListener('hashchange', scrollToCurrentHash);
+    window.addEventListener('load', scrollToCurrentHash);
+    scrollToCurrentHash();
+
+    return () => {
+      window.removeEventListener('hashchange', scrollToCurrentHash);
+      window.removeEventListener('load', scrollToCurrentHash);
+    };
+  }, []);
+
   // WhatsApp Inquiry Generator State
   const [inquirySpace, setInquirySpace] = useState('Domestic Home / Residence');
   const [inquiryNeed, setInquiryNeed] = useState('Fumigation & Pest Control');
@@ -118,15 +181,15 @@ export default function LandingPage() {
       category: 'wip' as const,
       categoryLabel: 'Environmental Services',
       badge: 'Documented Project',
-      title: 'Environmental Hygiene Control and Disinfestation',
+      title: 'Environmental Services and Disinfestation',
       subtitle: 'Fumigation, disinfection and decontamination for operational sites',
       locationOrTier: 'Delta State',
       image: fumigationImage.src,
-      description: 'Environmental hygiene control and disinfestation delivered for operational facilities in Delta State.',
+      description: 'Environmental services and disinfestation delivered for operational facilities in Delta State.',
       specifications: [
         'Fumigation and disinfestation',
         'Decontamination and disinfection support',
-        'Site-specific environmental hygiene planning',
+        'Site-specific environmental service planning',
       ],
       toolsUsed: 'Professional field application equipment and safety procedures',
       keyBenefit: 'A cleaner, safer operating environment',
@@ -154,7 +217,7 @@ export default function LandingPage() {
       category: 'expertise' as const,
       categoryLabel: 'Engineering & Water Treatment',
       badge: 'Documented Project',
-      title: 'Water Treatment Plant Installation and Analysis',
+      title: 'Water Treatment Plant Installation',
       subtitle: 'Water-treatment systems, plant installation and portable-water analysis',
       locationOrTier: 'Warri, Delta State',
       image: waterTreatmentImage.src,
@@ -211,46 +274,53 @@ export default function LandingPage() {
   const whyChooseCards = [
     {
       icon: <Award className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Around a Decade in Service',
+      title: 'Quality work',
       description:
-        'Substantial hands-on experience handling treatment challenges across Delta State and beyond.',
-      serviceName: 'Practical Experience & Longevity',
+        'We provide valued, excellent and professional products and services.',
+      serviceName: 'Quality service',
     },
     {
       icon: <Layers className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Diverse Environment Expertise',
+      title: 'Safety first',
       description:
-        'Proven methods tailored specifically for homes, corporate offices, guest houses, and commercial facilities.',
-      serviceName: 'Environment-Specific Assessment',
+        'We protect people, equipment and the environment in every job we do.',
+      serviceName: 'Safety support',
     },
     {
       icon: <Clock className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Responsive Communication',
+      title: 'Professional service',
       description:
-        'Direct phone line and instant WhatsApp messaging for prompt consultations and service scheduling.',
-      serviceName: 'Prompt Response Times',
+        'Our team brings practical knowledge and dependable support to each project.',
+      serviceName: 'Professional support',
     },
     {
       icon: <Ship className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Specialized Marine Capability',
+      title: 'Integrity',
       description:
-        'Experienced in unique marine environments including boats, houseboats, barges, and waterfront facilities.',
-      serviceName: 'Marine & Vessel Treatment',
+        'We work honestly and keep our service focused on the client’s needs.',
+      serviceName: 'Integrity',
     },
     {
       icon: <ShieldCheck className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Safe & Practical Applications',
+      title: 'Teamwork',
       description:
-        'Carefully selected formulations applied with safety-conscious protocols for people and pets.',
-      serviceName: 'Safety-First Formulations',
+        'We work together to meet project targets and deliver better results.',
+      serviceName: 'Teamwork',
     },
     {
       icon: <MessageCircle className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Honest, Clear Guidance',
+      title: 'Excellence',
       description:
-        'Transparent advice on whether your space needs fumigation, water treatment, or chemical supply.',
-      serviceName: 'Consultative Advice',
+        'We aim to be a trusted service provider wherever we work.',
+      serviceName: 'Excellence',
     },
+  ];
+
+  const productItems = [
+    { name: 'Industrial chemicals', description: 'Methanol, rigwash, xylene, chlorine, aluminium sulphate and acetic acid.', image: chemicalImage },
+    { name: 'Laboratory supplies', description: 'Laboratory chemicals, reagents, equipment and everyday testing items.', image: equipmentImage },
+    { name: 'Water-treatment supplies', description: 'Water-treatment products, treatment plants, pumps and related equipment.', image: waterTreatmentImage },
+    { name: 'Project supplies', description: 'Tools, general consumables and materials for industrial work.', image: marineImage },
   ];
 
   const faqItems = [
@@ -357,37 +427,52 @@ export default function LandingPage() {
             className="hidden lg:flex items-center gap-7 lg:gap-8 text-sm font-medium transition-colors duration-300"
           >
             <a
-              href="#services"
+              href="#hero-section"
+              onClick={(event) => navigateToSection(event, 'hero-section')}
               className={`transition-colors ${
                 isScrolled
                   ? 'text-[#06042D]/70 hover:text-[#06042D]'
                   : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
               }`}
             >
-              Services
+              Home
             </a>
             <a
               href="#about"
+              onClick={(event) => navigateToSection(event, 'about')}
               className={`transition-colors ${
                 isScrolled
                   ? 'text-[#06042D]/70 hover:text-[#06042D]'
                   : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
               }`}
             >
-              Why Ovichem
+              Who we are
             </a>
             <a
-              href="#faq"
+              href="#services"
+              onClick={(event) => navigateToSection(event, 'services')}
               className={`transition-colors ${
                 isScrolled
                   ? 'text-[#06042D]/70 hover:text-[#06042D]'
                   : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
               }`}
             >
-              Common Questions
+              What we do
+            </a>
+            <a
+              href="#products"
+              onClick={(event) => navigateToSection(event, 'products')}
+              className={`transition-colors ${
+                isScrolled
+                  ? 'text-[#06042D]/70 hover:text-[#06042D]'
+                  : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
+              }`}
+            >
+              Products
             </a>
             <a
               href="#contact"
+              onClick={(event) => navigateToSection(event, 'contact')}
               className={`transition-colors ${
                 isScrolled
                   ? 'text-[#06042D]/70 hover:text-[#990909]'
@@ -416,6 +501,8 @@ export default function LandingPage() {
             <button
               id="mobile-menu-trigger-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav-menu"
               className={`p-2 rounded-lg transition-colors ${
                 isScrolled
                   ? 'text-[#06042D] hover:bg-black/5'
@@ -432,52 +519,66 @@ export default function LandingPage() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
+              id="mobile-nav-menu"
+              role="navigation"
+              aria-label="Mobile Navigation"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className={`lg:hidden border-b px-4 pt-3 pb-6 space-y-3 transition-colors ${
                 isScrolled
                   ? 'bg-white/98 backdrop-blur-xl border-[#E5E5E5] text-[#06042D]'
-                  : 'bg-primary-900/95 backdrop-blur-xl border-white/15 text-white'
+                  : 'bg-[#06042D]/95 backdrop-blur-xl border-white/15 text-white'
               }`}
             >
               <div className="flex flex-col space-y-2 text-sm font-medium">
                 <a
-                  href="#services"
-                  onClick={() => setMobileMenuOpen(false)}
+                  href="#hero-section"
+                  onClick={(event) => navigateToSection(event, 'hero-section')}
                   className={`px-3 py-2 rounded-lg transition-colors ${
                     isScrolled
                       ? 'hover:bg-black/5 text-[#06042D]'
                       : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  Services
+                  Home
                 </a>
                 <a
                   href="#about"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(event) => navigateToSection(event, 'about')}
                   className={`px-3 py-2 rounded-lg transition-colors ${
                     isScrolled
                       ? 'hover:bg-black/5 text-[#06042D]'
                       : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  Why Ovichem
+                  Who we are
                 </a>
                 <a
-                  href="#faq"
-                  onClick={() => setMobileMenuOpen(false)}
+                  href="#services"
+                  onClick={(event) => navigateToSection(event, 'services')}
                   className={`px-3 py-2 rounded-lg transition-colors ${
                     isScrolled
                       ? 'hover:bg-black/5 text-[#06042D]'
                       : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  Common Questions
+                  What we do
+                </a>
+                <a
+                  href="#products"
+                  onClick={(event) => navigateToSection(event, 'products')}
+                  className={`px-3 py-2 rounded-lg transition-colors ${
+                    isScrolled
+                      ? 'hover:bg-black/5 text-[#06042D]'
+                      : 'hover:bg-white/10 text-white'
+                  }`}
+                >
+                  Products
                 </a>
                 <a
                   href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(event) => navigateToSection(event, 'contact')}
                   className={`px-3 py-2 rounded-lg transition-colors ${
                     isScrolled
                       ? 'hover:bg-black/5 text-[#06042D]'
@@ -555,7 +656,7 @@ export default function LandingPage() {
               id="hero-main-title"
               className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-serif-display text-[#FFFFFF] leading-[1.03] tracking-tight drop-shadow-sm font-normal"
             >
-              Chemical expertise for cleaner environments and better water
+              Welcome to Ovichem Consult Ltd
             </motion.h1>
 
             {/* Strategic Subtitle */}
@@ -566,7 +667,7 @@ export default function LandingPage() {
               id="hero-subtitle"
               className="text-sm sm:text-base md:text-lg text-white/90 font-normal leading-relaxed max-w-2xl pt-1 drop-shadow-sm"
             >
-              Practical chemical, environmental, and engineering support for the work ahead.
+              Chemical, Enivronmental Services and Engineering
             </motion.p>
 
             {/* Dual CTA Buttons */}
@@ -627,10 +728,10 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16">
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent-100 border border-accent-300 text-[#990909] text-xs font-semibold uppercase tracking-wider">
-                Our services
+                What we do
               </div>
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight leading-[1.08]">
-                Three ways we help you solve important problems
+                What we do
               </h2>
             </div>
 
@@ -672,7 +773,7 @@ export default function LandingPage() {
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-2xl font-serif-display font-medium text-white">
-                    Environmental Hygiene &amp; Fumigation
+                    Environmental Services
                   </h3>
                 </div>
               </div>
@@ -683,14 +784,14 @@ export default function LandingPage() {
                     “Deal with pest problems where they happen.”
                   </p>
                   <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    Fumigation, disinfestation, disinfection, decontamination, environmental audits, air-quality monitoring, and noise measurement.
+                    Fumigation, disinfection, disinfestation, environmental audits, air-quality monitoring and noise measurement.
                   </p>
                   <ul className="text-xs text-[#524B44] space-y-2 pt-2 border-t border-[#E5E5E5]/50">
                     <li className="flex items-center gap-2">
                       <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Fumigation, disinfestation &amp; disinfection
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Environmental audits and reporting
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Environmental audits and reports
                     </li>
                     <li className="flex items-center gap-2">
                       <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Well and tank cleaning support
@@ -712,7 +813,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Service 3: Engineering Services */}
+            {/* Service 3: Water Treatment */}
             <div
               id="service-card-water"
               className="order-3 p-2 rounded-[2rem] bg-white border border-[#E5E5E5]/70 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col group hover:border-[#E4980B]/50 transition-all"
@@ -728,12 +829,12 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/20">
-                    Engineering Services
+                    Water Treatment
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-2xl font-serif-display font-medium text-white">
-                    Water Treatment &amp; Engineering
+                    Water Treatment
                   </h3>
                 </div>
               </div>
@@ -744,7 +845,7 @@ export default function LandingPage() {
                     “Make your water suitable for drinking.”
                   </p>
                   <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    Water analysis, treatment plant installation, reverse osmosis, boreholes, commissioning, maintenance, rehabilitation, and technical support.
+                    Water analysis, treatment plant installation, boreholes, maintenance, upgrades and technical support.
                   </p>
                   <ul className="text-xs text-[#524B44] space-y-2 pt-2 border-t border-[#E5E5E5]/50">
                     <li className="flex items-center gap-2">
@@ -754,7 +855,7 @@ export default function LandingPage() {
                       <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Plant installation, operation &amp; maintenance
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Commissioning, upgrades &amp; consultancy
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Start-up, upgrades and support
                     </li>
                   </ul>
                 </div>
@@ -766,7 +867,7 @@ export default function LandingPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-between w-full text-xs font-semibold text-[#E4980B] group-hover:text-[#990909]"
                   >
-                    <span>Ask about engineering services</span>
+                    <span>Ask about water treatment</span>
                     <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
@@ -794,7 +895,7 @@ export default function LandingPage() {
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-2xl font-serif-display font-medium text-white">
-                    Chemicals, Laboratory Supply &amp; Procurement
+                    Chemicals and Laboratory Supplies
                   </h3>
                 </div>
               </div>
@@ -805,7 +906,7 @@ export default function LandingPage() {
                     “Get the chemicals you need for the job.”
                   </p>
                   <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    Industrial and laboratory chemicals, reagents, water-treatment products, pipeline materials, tools, equipment, and project consumables.
+                    Chemicals, laboratory reagents, water-treatment products, equipment and other project supplies.
                   </p>
                   <ul className="text-xs text-[#524B44] space-y-2 pt-2 border-t border-[#E5E5E5]/50">
                     <li className="flex items-center gap-2">
@@ -839,10 +940,44 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 5. PROJECTS, PRODUCTS & SERVICE PROOF SECTION */}
+      {/* 5. PRODUCTS SECTION */}
+      <section id="products" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 max-w-3xl space-y-4">
+            <div className="inline-flex items-center rounded-full border border-[#E4980B]/30 bg-[#E4980B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#990909]">
+              Products we supply
+            </div>
+            <h2 className="text-3xl leading-[1.08] tracking-tight text-[#06042D] sm:text-5xl">
+              Chemicals, equipment and supplies for the job
+            </h2>
+            <p className="text-sm leading-relaxed text-[#666666] sm:text-base">
+              We supply industrial and laboratory products, water-treatment items and general project supplies. Contact us for the product you need.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {productItems.map((product) => (
+              <article key={product.name} className="group overflow-hidden rounded-2xl border border-[#E5E5E5] bg-white shadow-sm">
+                <div className="relative h-48 overflow-hidden bg-[#1E2E28]">
+                  <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                </div>
+                <div className="space-y-3 p-5">
+                  <h3 className="text-xl font-medium leading-tight text-[#06042D]">{product.name}</h3>
+                  <p className="text-xs leading-relaxed text-[#666666]">{product.description}</p>
+                  <a href={generateWhatsappUrl(product.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-[#990909] transition-colors hover:text-[#E4980B]">
+                    Ask about this product <ChevronRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. RECENT WORK GALLERY */}
       <section
         id="gallery"
-        className="py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#E5E5E5]/70"
+        className="scroll-mt-24 bg-[#FFFFFF] py-24 sm:py-32 border-b border-[#E5E5E5]/70"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -852,13 +987,13 @@ export default function LandingPage() {
                 <span>Selected work</span>
               </div>
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight leading-[1.08]">
-                Selected work and supply
+                Recent work
               </h2>
             </div>
 
             <div className="lg:col-span-5 space-y-5 lg:pl-6">
               <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
-                Explore documented environmental, engineering, chemical, and procurement work from Warri, Delta State, and regional project sites.
+                A small look at environmental work, chemical supply and water-treatment projects completed by the team.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <a
@@ -880,7 +1015,7 @@ export default function LandingPage() {
               { id: 'all', label: 'Selected Work', count: galleryItems.length },
               { id: 'wip', label: 'Environmental Work', count: galleryItems.filter((i) => i.category === 'wip').length },
               { id: 'products', label: 'Chemicals & Procurement', count: galleryItems.filter((i) => i.category === 'products').length },
-              { id: 'expertise', label: 'Engineering & Water', count: galleryItems.filter((i) => i.category === 'expertise').length },
+              { id: 'expertise', label: 'Water Treatment', count: galleryItems.filter((i) => i.category === 'expertise').length },
             ].map((tab) => {
               const isActive = galleryFilter === tab.id;
               return (
@@ -1030,6 +1165,35 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* 6. MINI PROJECT GALLERY */}
+      <section id="project-gallery" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F8F7FC] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">From our work</p>
+              <h2 className="mt-2 text-3xl text-[#06042D] sm:text-4xl">A look at what we do</h2>
+            </div>
+            <a href="#contact" className="inline-flex items-center gap-1 text-sm font-semibold text-[#990909] hover:text-[#E4980B]">
+              Talk to the team <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {[
+              { image: fumigationImage, label: 'Environmental services' },
+              { image: waterTreatmentImage, label: 'Water treatment' },
+              { image: chemicalImage, label: 'Chemical supply' },
+            ].map((item) => (
+              <div key={item.label} className="relative h-56 overflow-hidden rounded-2xl bg-[#06042D] sm:h-64">
+                <Image src={item.image} alt={item.label} fill className="object-cover transition-transform duration-700 hover:scale-105" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-5 pb-4 pt-12">
+                  <p className="text-sm font-semibold text-white">{item.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* LIGHTBOX / SPECIFICATIONS MODAL VIEWER */}
       <AnimatePresence>
         {selectedGalleryItem && (
@@ -1132,7 +1296,7 @@ export default function LandingPage() {
       </AnimatePresence>
 
       {/* 6. ABOUT US SECTION */}
-      <section id="about" className="py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#E5E5E5]/60">
+      <section id="about" className="scroll-mt-24 py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#E5E5E5]/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
@@ -1216,18 +1380,18 @@ export default function LandingPage() {
       </section>
 
       {/* 7. WHY CHOOSE US SECTION */}
-      <section id="why-choose-us" className="py-24 sm:py-32 bg-[#F6F1EA] border-b border-[#E5E5E5]/60">
+      <section id="why-choose-us" className="scroll-mt-24 py-24 sm:py-32 bg-[#F6F1EA] border-b border-[#E5E5E5]/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
           <div className="max-w-3xl mx-auto space-y-4 mb-10">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
-              Why use us
+              Why choose Ovichem
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight">
-              Guided by integrity, innovation, and chemical expertise
+              Quality, safety and professional service
             </h2>
             <p className="text-sm sm:text-base text-[#666666] leading-relaxed max-w-2xl mx-auto">
-              Optimal solutions, value-driven service, competence, honesty, efficiency, and merit guide the way we work.
+              Our work is guided by quality, integrity, professionalism, teamwork and excellence.
             </p>
 
             <div className="pt-2">
@@ -1281,7 +1445,7 @@ export default function LandingPage() {
       {/* 8. DIRECT CONTACT SECTION */}
       <section
         id="contact"
-        className="relative min-h-[580px] lg:min-h-[640px] flex flex-col justify-center overflow-hidden text-white"
+        className="scroll-mt-24 relative min-h-[580px] lg:min-h-[640px] flex flex-col justify-center overflow-hidden text-white"
       >
         {/* Background Image of Technician in Action with Warm Atmospheric Overlay (Exact Match to Image 1) */}
         <div
@@ -1408,7 +1572,7 @@ export default function LandingPage() {
                       className="w-full bg-[#2A201A] border border-white/20 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E4980B]"
                     >
                       <option value="Environmental Services">Environmental Services</option>
-                      <option value="Water Treatment & Engineering">Water Treatment &amp; Engineering</option>
+                      <option value="Water Treatment">Water Treatment</option>
                       <option value="Chemicals & Laboratory Supply">Chemicals &amp; Laboratory Supply</option>
                       <option value="Procurement & Industrial Supply">Procurement &amp; Industrial Supply</option>
                       <option value="Technical Consultancy">Technical Consultancy</option>
@@ -1648,8 +1812,8 @@ export default function LandingPage() {
                   </a>
                 </li>
                 <li>
-                  <a href="#gallery" className="hover:text-[#E4980B] transition-colors">
-                    Services &amp; Results
+                  <a href="#products" className="hover:text-[#E4980B] transition-colors">
+                    Products
                   </a>
                 </li>
                 <li>
