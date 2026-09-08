@@ -3,21 +3,45 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
-import logoImage from '../assets/company photos/logo-removebg-preview.png';
-import heroImage from '../assets/company photos/IMG-20260804-WA0010.jpg';
-import fumigationImage from '../assets/company photos/work in progress (1).jpg';
-import waterTreatmentImage from '../assets/company photos/IMG-20260804-WA0005.jpg';
-import chemicalImage from '../assets/company photos/products (1).jpg';
-import teamImage from '../assets/company photos/team (1).jpg';
-import aboutImage from '../assets/company photos/about.jpg';
-import waterSystemImage from '../assets/company photos/work in progress (2).jpg';
-import equipmentImage from '../assets/company photos/products (2).jpg';
-import marineImage from '../assets/company photos/work in progress (3).jpg';
-import waterTestImage from '../assets/company photos/IMG-20260804-WA0006.jpg';
-import waterAwarenessImage from '../assets/company photos/water.jpg';
-import fumigationServiceImage from '../assets/company photos/fumigation image.jpg';
-import waterTreatmentServiceImage from '../assets/company photos/water treatment image.jpg';
-import engineeringServiceImage from '../assets/company photos/engineering image.jpg';
+
+const imagePath = (fileName: string) => `/company-photos/${fileName}`;
+const logoImage = imagePath('logo-removebg-preview.png');
+const heroImages = [
+  imagePath('hero-images/engineering image.jpg'),
+  imagePath('hero-images/IMG-20260708-WA0007.jpg'),
+  imagePath('hero-images/Keg1.jpg'),
+  imagePath('hero-images/Keg2.jpg'),
+  imagePath('hero-images/team (1).jpg'),
+  imagePath('hero-images/team (2).jpg'),
+  imagePath('hero-images/work in progress (8).jpg'),
+];
+const fumigationImage = imagePath('work in progress (1).jpg');
+const waterTreatmentImage = imagePath('products (3).jpg');
+const chemicalImage = imagePath('chemical-sales/chlorine.jpg');
+const aboutImage = imagePath('about.jpg');
+const equipmentImage = imagePath('products (2).jpg');
+const marineImage = imagePath('IMG-20260708-WA0007.jpg');
+const waterTestImage = imagePath('engineering/IMG-20260804-WA0006.jpg');
+const waterAwarenessImage = imagePath('water.jpg');
+
+const chemicalSalesImages = [
+  imagePath('chemical-sales/chlorine.jpg'),
+  imagePath('chemical-sales/Keg1.jpg'),
+  imagePath('chemical-sales/Keg2.jpg'),
+  imagePath('chemical-sales/products (8).jpg'),
+];
+const environmentalServicesImages = [
+  imagePath('environmental-services/fumigation image.jpg'),
+  imagePath('environmental-services/IMG-20260708-WA0003.jpg'),
+  imagePath('environmental-services/team (2).jpg'),
+  imagePath('environmental-services/work in progress (3).jpg'),
+];
+const engineeringImages = [
+  imagePath('engineering/IMG-20260804-WA0005.jpg'),
+  imagePath('engineering/IMG-20260804-WA0006.jpg'),
+  imagePath('engineering/team (1).jpg'),
+  imagePath('engineering/team (5).jpg'),
+];
 import {
   Phone,
   MessageCircle,
@@ -45,6 +69,21 @@ export default function LandingPage() {
   const [activeAboutTab, setActiveAboutTab] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [activeChemicalSalesImage, setActiveChemicalSalesImage] = useState(0);
+  const [activeEnvironmentalServicesImage, setActiveEnvironmentalServicesImage] = useState(0);
+  const [activeEngineeringImage, setActiveEngineeringImage] = useState(0);
+  const [activeHeroImage, setActiveHeroImage] = useState(0);
+
+  useEffect(() => {
+    const slideshowInterval = window.setInterval(() => {
+      setActiveHeroImage((current) => (current + 1) % heroImages.length);
+      setActiveChemicalSalesImage((current) => (current + 1) % chemicalSalesImages.length);
+      setActiveEnvironmentalServicesImage((current) => (current + 1) % environmentalServicesImages.length);
+      setActiveEngineeringImage((current) => (current + 1) % engineeringImages.length);
+    }, 3800);
+
+    return () => window.clearInterval(slideshowInterval);
+  }, []);
 
   // Monitor scroll position to adapt header background and text colors
   useEffect(() => {
@@ -170,7 +209,7 @@ export default function LandingPage() {
     const sp = space || inquirySpace;
     const l = loc || inquiryLocation;
     const text = encodeURIComponent(
-      `Hello Ovichem Consult Ltd. I would like to inquire about ${s} for my ${sp} in ${l}. Please let me know your availability and next steps.`
+      `Hello Ovichem Consult Limited. I would like to inquire about ${s} for my ${sp} in ${l}. Please let me know your availability and next steps.`
     );
     return `https://wa.me/${defaultWhatsappNumber}?text=${text}`;
   };
@@ -184,7 +223,7 @@ export default function LandingPage() {
       title: 'Environmental Services and Disinfestation',
       subtitle: 'Fumigation, disinfection and decontamination for operational sites',
       locationOrTier: 'Delta State',
-      image: fumigationImage.src,
+      image: fumigationImage,
       description: 'Environmental services and disinfestation delivered for operational facilities in Delta State.',
       specifications: [
         'Fumigation and disinfestation',
@@ -202,7 +241,7 @@ export default function LandingPage() {
       title: 'Industrial and Laboratory Chemicals',
       subtitle: 'Chemical and reagent supply for industrial, laboratory and environmental applications',
       locationOrTier: 'Delta State and Regional Supply',
-      image: chemicalImage.src,
+      image: chemicalImage,
       description: 'Ovichem supplies industrial chemicals, laboratory reagents and water-treatment chemicals for multiple applications.',
       specifications: [
         'Methanol, Rigwash and Xylene',
@@ -220,7 +259,7 @@ export default function LandingPage() {
       title: 'Water Treatment Plant Installation',
       subtitle: 'Water-treatment systems, plant installation and portable-water analysis',
       locationOrTier: 'Warri, Delta State',
-      image: waterTreatmentImage.src,
+      image: waterTreatmentImage,
       description: 'Ovichem installs and supports water-treatment systems, including documented plant installation and portable-water analysis projects.',
       specifications: [
         'Water analysis and treatment recommendations',
@@ -238,7 +277,7 @@ export default function LandingPage() {
       title: 'Pipeline Materials, Tools and Consumables',
       subtitle: 'Materials and equipment supply for pipeline development and industrial operations',
       locationOrTier: 'Delta State and Regional Projects',
-      image: marineImage.src,
+      image: marineImage,
       description: 'Ovichem supplies materials, consumables and tools for pipeline development and industrial project teams.',
       specifications: [
         'Cutting and grinding discs, brushes and gloves',
@@ -271,49 +310,14 @@ export default function LandingPage() {
     },
   ];
 
-  const whyChooseCards = [
-    {
-      icon: <Award className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Quality work',
-      description:
-        'We provide valued, excellent and professional products and services.',
-      serviceName: 'Quality service',
-    },
-    {
-      icon: <Layers className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Safety first',
-      description:
-        'We protect people, equipment and the environment in every job we do.',
-      serviceName: 'Safety support',
-    },
-    {
-      icon: <Clock className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Professional service',
-      description:
-        'Our team brings practical knowledge and dependable support to each project.',
-      serviceName: 'Professional support',
-    },
-    {
-      icon: <Ship className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Integrity',
-      description:
-        'We work honestly and keep our service focused on the client’s needs.',
-      serviceName: 'Integrity',
-    },
-    {
-      icon: <ShieldCheck className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Teamwork',
-      description:
-        'We work together to meet project targets and deliver better results.',
-      serviceName: 'Teamwork',
-    },
-    {
-      icon: <MessageCircle className="w-5 h-5 text-[#E4980B]" />,
-      title: 'Excellence',
-      description:
-        'We aim to be a trusted service provider wherever we work.',
-      serviceName: 'Excellence',
-    },
+  const whyUseUsPoints = [
+    ['O', 'Optimal Solutions and Operational Excellence'],
+    ['V', 'Value driven and Viability'],
+    ['I', 'Integrity and Innovation'],
+    ['C', 'Competence and Chemical Expertise'],
+    ['H', 'Honesty and HSE Compliant'],
+    ['E', 'Efficiency and Engineering Excellence'],
+    ['M', 'Management and Merit'],
   ];
 
   const productItems = [
@@ -369,7 +373,7 @@ export default function LandingPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
-            name: 'Ovichem Consult Ltd',
+            name: 'Ovichem Consult Limited',
             description:
               'Fumigation services, water treatment, and fumigative chemical supply for homes and businesses.',
             areaServed: ['Warri', 'Delta State', 'Nigeria'],
@@ -484,17 +488,7 @@ export default function LandingPage() {
           </nav>
 
           {/* Right Action Button */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              id="header-consult-btn"
-              href={generateWhatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-[#E4980B] hover:bg-[#990909] text-white text-sm font-normal px-6 py-2.5 rounded-full shadow-md shadow-black/25 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <span>Request a quote</span>
-            </a>
-          </div>
+         
 
           {/* Mobile Menu Trigger */}
           <div className="flex lg:hidden items-center">
@@ -594,15 +588,7 @@ export default function LandingPage() {
                   isScrolled ? 'border-[#E5E5E5]' : 'border-white/10'
                 }`}
               >
-                <a
-                  href={generateWhatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full text-center bg-[#E4980B] text-white font-medium py-3 rounded-full flex items-center justify-center gap-2 text-sm"
-                >
-                  <MessageCircle className="w-4 h-4 fill-current" />
-                  Request a quote
-                </a>
+             
               </div>
             </motion.div>
           )}
@@ -616,37 +602,28 @@ export default function LandingPage() {
       >
         <div
           id="hero-bg-container"
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('${heroImage.src}')`,
-          }}
+          className="absolute inset-0 z-0 overflow-hidden bg-[#06042D]"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#06042D]/85 via-[#0D0A47]/75 to-[#06042D]/80" />
-          <div className="absolute inset-0 bg-primary-900/40 backdrop-blur-[0.5px]" />
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={heroImages[activeHeroImage]}
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.1, ease: 'easeInOut' }}
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url('${heroImages[activeHeroImage]}')` }}
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#06042D]/55 via-[#0D0A47]/45 to-[#06042D]/50" />
+          <div className="absolute inset-0 bg-primary-900/15 backdrop-blur-[0.5px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 w-full">
           <div className="max-w-3xl lg:max-w-4xl space-y-5 sm:space-y-6">
             
-            {/* Rating Stars & Count */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              id="hero-rating-badge"
-              className="flex items-center gap-2 text-white/95"
-            >
-              <div className="flex items-center gap-0.5 text-[#F0B84D]">
-                <Star className="w-4 h-4 fill-[#F0B84D] stroke-none" />
-                <Star className="w-4 h-4 fill-[#F0B84D] stroke-none" />
-                <Star className="w-4 h-4 fill-[#F0B84D] stroke-none" />
-                <Star className="w-4 h-4 fill-[#F0B84D] stroke-none" />
-                <Star className="w-4 h-4 fill-[#F0B84D] stroke-none" />
-              </div>
-              <span className="text-xs sm:text-sm font-normal text-white/80 tracking-wide ml-1">
-                Fumigation, water treatment &amp; chemical supply
-              </span>
-            </motion.div>
+          
 
             {/* Main Headline */}
             <motion.h1
@@ -656,7 +633,7 @@ export default function LandingPage() {
               id="hero-main-title"
               className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-serif-display text-[#FFFFFF] leading-[1.03] tracking-tight drop-shadow-sm font-normal"
             >
-              Welcome to Ovichem Consult Ltd
+              Welcome to Ovichem Consult Limited
             </motion.h1>
 
             {/* Strategic Subtitle */}
@@ -667,37 +644,10 @@ export default function LandingPage() {
               id="hero-subtitle"
               className="text-sm sm:text-base md:text-lg text-white/90 font-normal leading-relaxed max-w-2xl pt-1 drop-shadow-sm"
             >
-              Chemical, Enivronmental Services and Engineering
+              Chemicals, Enivronmental Services and Engineering
             </motion.p>
 
-            {/* Dual CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              id="hero-cta-group"
-              className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4"
-            >
-              <a
-                id="hero-primary-cta"
-                href={generateWhatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#E4980B] hover:bg-[#990909] text-white text-sm sm:text-base font-normal px-7 py-3.5 sm:px-8 sm:py-3.5 rounded-full shadow-md shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
-              >
-                <span>Get a fumigation quote</span>
-              </a>
 
-              <a
-                id="hero-whatsapp-cta"
-                href={generateWhatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-white/15 hover:bg-white/25 text-white border border-white/40 hover:border-white/60 text-sm sm:text-base font-normal px-7 py-3.5 sm:px-8 sm:py-3.5 rounded-full backdrop-blur-sm transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
-              >
-                <span>Talk to a treatment specialist</span>
-              </a>
-            </motion.div>
 
             {/* Warri & Delta State Footnote */}
             <motion.div
@@ -718,15 +668,47 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 3. SERVICES SECTION */}
+      {/* 3. CLIENTS SECTION */}
+      <section id="clients" className="border-b border-[#E5E5E5] bg-[#FAFAFA] py-8 sm:py-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-end gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+          <div className="space-y-4 lg:col-span-5">
+            <div className="inline-flex items-center rounded-full border border-[#E4980B]/30 bg-[#E4980B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#990909]">
+              Our clients
+            </div>
+            <h2 className="font-serif-display text-3xl leading-[1.08] tracking-tight text-[#06042D] sm:text-5xl">
+              Our clients
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4 lg:col-span-7 lg:gap-8">
+            {[
+              'Delta Industrial Works',
+              'Meridian Energy Group',
+              'Harbour Point Labs',
+              'Northstar Facilities',
+            ].map((client, index) => (
+              <div key={client} className="flex items-center gap-3 text-[#666666]">
+                <svg viewBox="0 0 24 24" className="h-8 w-8 shrink-0 text-[#999999]" fill="none" aria-hidden="true">
+                  {index % 3 === 0 && <path d="M12 3 21 8v8l-9 5-9-5V8l9-5Z" stroke="currentColor" strokeWidth="1.5" />}
+                  {index % 3 === 1 && <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="1.5" />}
+                  {index % 3 === 2 && <path d="m4 18 5-10 3 6 2-3 6 7H4Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />}
+                </svg>
+                <span className="max-w-[10rem] text-sm font-medium leading-tight">{client}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. SERVICES SECTION */}
       <section
         id="services"
-        className="py-24 sm:py-32 bg-[#F8F7FC] hover:bg-white border-b border-[#E5E5E5]"
+        className="py-12 sm:py-16 bg-[#F8F7FC] hover:bg-white border-b border-[#E5E5E5]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16">
-            <div className="lg:col-span-7 space-y-4">
+          <div className="mb-10 sm:mb-12">
+            <div className="space-y-4">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-accent-100 border border-accent-300 text-[#990909] text-xs font-semibold uppercase tracking-wider">
                 What we do
               </div>
@@ -735,36 +717,34 @@ export default function LandingPage() {
               </h2>
             </div>
 
-            <div className="lg:col-span-5 space-y-6 lg:pl-6">
-              <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
-                From the materials that make a process possible, to environmental measurement and engineering delivery, our work connects chemical knowledge with practical field results.
-              </p>
-              <div>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 bg-[#E4980B] hover:bg-[#990909] text-white text-sm font-normal px-7 py-3 rounded-full shadow-md shadow-black/15 transition-all"
-                >
-                  <span>Discuss your requirement</span>
-                </a>
-              </div>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            {/* Service 2: Environmental Services */}
+            {/* Environmental Services */}
             <div
-              id="service-card-fumigation"
+              id="service-card-environmental-services"
               className="order-2 p-2 rounded-[2rem] bg-white border border-[#E5E5E5] shadow-md flex flex-col group hover:border-[#F0B84D] hover:shadow-lg transition-all"
             >
-              <div className="relative h-64 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-primary-900">
-                <Image
-                  src={fumigationServiceImage}
-                  alt="Fumigation and pest control specialist"
-                  fill
-                  referrerPolicy="no-referrer"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+              <div className="relative h-80 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-primary-900">
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={environmentalServicesImages[activeEnvironmentalServicesImage]}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: 'easeInOut' }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={environmentalServicesImages[activeEnvironmentalServicesImage]}
+                      alt="Environmental services field work"
+                      fill
+                      referrerPolicy="no-referrer"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/20">
@@ -781,20 +761,23 @@ export default function LandingPage() {
               <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
                 <div className="space-y-3">
                   <p className="text-xs font-semibold text-[#990909] italic">
-                    “Deal with pest problems where they happen.”
+                    “Creating cleaner, safer and more sustainable environments.”
                   </p>
                   <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    Fumigation, disinfection, disinfestation, environmental audits, air-quality monitoring and noise measurement.
+                    We provide reliable and professional environmental services designed to protect people, facilities and the environment. 
                   </p>
                   <ul className="text-xs text-[#524B44] space-y-2 pt-2 border-t border-[#E5E5E5]/50">
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Fumigation, disinfestation &amp; disinfection
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Environmental Audit Reporting (EAR)
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Environmental audits and reports
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Air Quality Monitoring
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Well and tank cleaning support
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Noise Measurement
+                    </li>
+                     <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Decontamination, Disinfection and Disinfestation
                     </li>
                   </ul>
                 </div>
@@ -813,28 +796,39 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Service 3: Water Treatment */}
+            {/* Engineering */}
             <div
-              id="service-card-water"
+              id="service-card-engineering"
               className="order-3 p-2 rounded-[2rem] bg-white border border-[#E5E5E5]/70 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col group hover:border-[#E4980B]/50 transition-all"
             >
-              <div className="relative h-64 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[#1E293B]">
-                <Image
-                  src={waterTreatmentServiceImage}
-                  alt="Drinking water treatment"
-                  fill
-                  referrerPolicy="no-referrer"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+              <div className="relative h-80 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[#1E293B]">
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={engineeringImages[activeEngineeringImage]}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: 'easeInOut' }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={engineeringImages[activeEngineeringImage]}
+                      alt="Engineering services project"
+                      fill
+                      referrerPolicy="no-referrer"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/20">
-                    Water Treatment
+                    Engineering
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-2xl font-serif-display font-medium text-white">
-                    Water Treatment
+                    Engineering
                   </h3>
                 </div>
               </div>
@@ -842,20 +836,26 @@ export default function LandingPage() {
               <div className="p-6 flex flex-col justify-between flex-1 space-y-4">
                 <div className="space-y-3">
                   <p className="text-xs font-semibold text-[#990909] italic">
-                    “Make your water suitable for drinking.”
+                    “Innovative engineering solutions built for performance, safety and reliability”
                   </p>
                   <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    Water analysis, treatment plant installation, boreholes, maintenance, upgrades and technical support.
+                    We provide practical and cost-effective engineering solutions that helps organizations improve operational efficiency, reliability and safety.
                   </p>
                   <ul className="text-xs text-[#524B44] space-y-2 pt-2 border-t border-[#E5E5E5]/50">
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Water analysis and treatment systems
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Water Treatment
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Plant installation, operation &amp; maintenance
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Water Treatment Plant/Equipment Installation, Operation and Maintenance
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Start-up, upgrades and support
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 		Commissioning and Start-Up
+                    </li>
+                     <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 		Rehabilitation and Upgrade
+                    </li>
+                     <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 		Technical Consultancy and Support Services
                     </li>
                   </ul>
                 </div>
@@ -867,35 +867,46 @@ export default function LandingPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-between w-full text-xs font-semibold text-[#E4980B] group-hover:text-[#990909]"
                   >
-                    <span>Ask about water treatment</span>
+                    <span>Ask about Engineering services</span>
                     <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Service 1: Chemicals & Procurement */}
+            {/* Chemical Sales, Supply and Support Services */}
             <div
-              id="service-card-chemicals"
+              id="service-card-chemical-sales"
               className="order-1 p-2 rounded-[2rem] bg-white border border-[#E5E5E5]/70 shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col group hover:border-[#E4980B]/50 transition-all"
             >
-              <div className="relative h-64 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[#1E2E28]">
-                <Image
-                  src={engineeringServiceImage}
-                  alt="Chemical supplies for fumigation and water treatment"
-                  fill
-                  referrerPolicy="no-referrer"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+              <div className="relative h-80 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[#1E2E28]">
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={chemicalSalesImages[activeChemicalSalesImage]}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: 'easeInOut' }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={chemicalSalesImages[activeChemicalSalesImage]}
+                      alt="Chemical sales and supply products"
+                      fill
+                      referrerPolicy="no-referrer"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/20">
-                    Chemicals &amp; Procurement
+                    Chemicals
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-2xl font-serif-display font-medium text-white">
-                    Chemicals and Laboratory Supplies
+                    Chemical Sales, Supply and Support Services
                   </h3>
                 </div>
               </div>
@@ -906,17 +917,28 @@ export default function LandingPage() {
                     “Get the chemicals you need for the job.”
                   </p>
                   <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    Chemicals, laboratory reagents, water-treatment products, equipment and other project supplies.
-                  </p>
+                      We supply industrial chemicals and laboratory chemicals/reagents for various applications across multiple industries                  </p>
                   <ul className="text-xs text-[#524B44] space-y-2 pt-2 border-t border-[#E5E5E5]/50">
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Industrial chemicals and laboratory reagents
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Methanol
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Pipeline materials, tools &amp; consumables
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> 	Chlorine
                     </li>
                     <li className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#E4980B]" /> Procurement and technical supply support
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" />	Aluminum Sulphate
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" />		Rigwash
+                    </li>
+                      <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" />		Ion Exchange Resins
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" />		Birm Managanese Greensand
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#E4980B]" />		Xylene
                     </li>
                   </ul>
                 </div>
@@ -943,33 +965,44 @@ export default function LandingPage() {
       {/* 5. PRODUCTS SECTION */}
       <section id="products" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 max-w-3xl space-y-4">
-            <div className="inline-flex items-center rounded-full border border-[#E4980B]/30 bg-[#E4980B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#990909]">
-              Products we supply
-            </div>
-            <h2 className="text-3xl leading-[1.08] tracking-tight text-[#06042D] sm:text-5xl">
-              Chemicals, equipment and supplies for the job
-            </h2>
-            <p className="text-sm leading-relaxed text-[#666666] sm:text-base">
-              We supply industrial and laboratory products, water-treatment items and general project supplies. Contact us for the product you need.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-stretch">
+            <div className="flex flex-col justify-between rounded-2xl border border-[#E5E5E5] bg-[#06042D] p-7 text-white shadow-sm sm:p-9 lg:col-span-5">
+              <div className="space-y-5">
+                <div className="inline-flex items-center rounded-full border border-[#F0B84D]/40 bg-[#F0B84D]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#F0B84D]">
+                  Products we supply
+                </div>
+                <h2 className="max-w-lg text-3xl leading-[1.08] tracking-tight sm:text-5xl">
+                  Chemicals, equipment and supplies for the job
+                </h2>
+                <p className="max-w-md text-sm leading-relaxed text-white/70 sm:text-base">
+                    We supply Industrial and laboratory chemicals/reagents, water-treatment equipment and general project supplies for various applications across multiple industries. 
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {productItems.map((product) => (
-              <article key={product.name} className="group overflow-hidden rounded-2xl border border-[#E5E5E5] bg-white shadow-sm">
-                <div className="relative h-48 overflow-hidden bg-[#1E2E28]">
-                  <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                </div>
-                <div className="space-y-3 p-5">
-                  <h3 className="text-xl font-medium leading-tight text-[#06042D]">{product.name}</h3>
-                  <p className="text-xs leading-relaxed text-[#666666]">{product.description}</p>
-                  <a href={generateWhatsappUrl(product.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-[#990909] transition-colors hover:text-[#E4980B]">
-                    Ask about this product <ChevronRight className="h-3.5 w-3.5" />
-                  </a>
-                </div>
-              </article>
-            ))}
+                </p>
+              </div>
+              <div className="mt-12 flex items-center gap-3 border-t border-white/15 pt-5 text-xs text-white/60">
+                <Package className="h-4 w-4 text-[#F0B84D]" />
+                <span>Specification-led supply for field and laboratory work</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-7">
+              {productItems.map((product) => (
+                <article key={product.name} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E5E5] bg-white shadow-sm">
+                  <div className="relative h-72 shrink-0 overflow-hidden bg-[#1E2E28]">
+                    <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="flex min-h-[174px] flex-1 flex-col justify-between gap-4 p-5">
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-medium leading-tight text-[#06042D]">{product.name}</h3>
+                      <p className="text-xs leading-relaxed text-[#666666]">{product.description}</p>
+                    </div>
+                    <a href={generateWhatsappUrl(product.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-[#990909] transition-colors hover:text-[#E4980B]">
+                      Ask about this product <ChevronRight className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -981,8 +1014,8 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12 sm:mb-16">
-            <div className="lg:col-span-7 space-y-4">
+          <div className="mb-12 sm:mb-16">
+            <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
                 <span>Selected work</span>
               </div>
@@ -991,22 +1024,6 @@ export default function LandingPage() {
               </h2>
             </div>
 
-            <div className="lg:col-span-5 space-y-5 lg:pl-6">
-              <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
-                A small look at environmental work, chemical supply and water-treatment projects completed by the team.
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href={generateWhatsappUrl('Product Catalog & Supplies')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#E4980B] hover:bg-[#990909] text-white text-xs sm:text-sm font-normal px-6 py-2.5 rounded-full shadow-md shadow-black/15 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  <Package className="w-4 h-4" />
-                  <span>Request Product Price List</span>
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Category Filter Pills Bar */}
@@ -1057,7 +1074,7 @@ export default function LandingPage() {
                   id={`gallery-card-${item.id}`}
                   className="p-2 rounded-2xl bg-white border border-[#E5E5E5]/80 shadow-[0_4px_16px_rgba(0,0,0,0.02)] flex flex-col justify-between group hover:border-[#E4980B]/50 hover:shadow-md transition-all duration-300"
                 >
-                  <div className="relative h-56 rounded-[calc(1rem-0.25rem)] overflow-hidden bg-[#1E1915]">
+                  <div className="relative h-72 rounded-[calc(1rem-0.25rem)] overflow-hidden bg-[#1E1915]">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -1183,7 +1200,7 @@ export default function LandingPage() {
               { image: waterTreatmentImage, label: 'Water treatment' },
               { image: chemicalImage, label: 'Chemical supply' },
             ].map((item) => (
-              <div key={item.label} className="relative h-56 overflow-hidden rounded-2xl bg-[#06042D] sm:h-64">
+              <div key={item.label} className="relative h-72 overflow-hidden rounded-2xl bg-[#06042D] sm:h-80">
                 <Image src={item.image} alt={item.label} fill className="object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-5 pb-4 pt-12">
                   <p className="text-sm font-semibold text-white">{item.label}</p>
@@ -1379,64 +1396,66 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 7. WHY CHOOSE US SECTION */}
+      {/* 7. WHY USE US, MISSION & VALUES SECTION */}
       <section id="why-choose-us" className="scroll-mt-24 py-24 sm:py-32 bg-[#F6F1EA] border-b border-[#E5E5E5]/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <div className="max-w-3xl mx-auto space-y-4 mb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
-              Why choose Ovichem
+              Why use us
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight">
-              Quality, safety and professional service
+              Why use Ovichem?
             </h2>
             <p className="text-sm sm:text-base text-[#666666] leading-relaxed max-w-2xl mx-auto">
-              Our work is guided by quality, integrity, professionalism, teamwork and excellence.
+              We combine chemical expertise, environmental responsibility and engineering discipline to deliver dependable work.
             </p>
-
-            <div className="pt-2">
-              <a
-                href={generateWhatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#E4980B] hover:bg-[#990909] text-white text-sm font-normal px-8 py-3.5 rounded-full shadow-md shadow-black/15 transition-all"
-              >
-                <span>Request treatment advice</span>
-              </a>
-            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left pt-6">
-            {whyChooseCards.map((card, index) => (
-              <div
-                key={index}
-                className="p-8 rounded-2xl bg-white border border-[#E5E5E5]/80 shadow-[0_4px_16px_rgba(0,0,0,0.02)] flex flex-col justify-between space-y-6 hover:border-[#E4980B]/50 transition-all group"
-              >
-                <div className="space-y-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#FFFFFF] border border-[#E5E5E5] flex items-center justify-center">
-                    {card.icon}
-                  </div>
-                  <h3 className="text-xl font-serif-display font-medium text-[#06042D]">
-                    {card.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                    {card.description}
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <a
-                    href={generateWhatsappUrl(card.serviceName)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8C4F2D] group-hover:text-[#E4980B] transition-colors"
-                  >
-                    <span>Get in touch</span>
-                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left">
+            <div className="rounded-2xl bg-white border border-[#E5E5E5]/80 p-7 sm:p-9 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
+              <div className="flex items-center gap-2 mb-3">
+                <Award className="w-5 h-5 text-[#E4980B]" />
+                <h3 className="text-2xl font-serif-display text-[#06042D]">Our mission</h3>
               </div>
-            ))}
+              <p className="text-sm leading-relaxed text-[#666666]">
+                To provide valued, excellent and professional chemical, environmental and engineering services while protecting personnel, equipment and the environment.
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white border border-[#E5E5E5]/80 p-7 sm:p-9 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
+              <div className="flex items-center gap-2 mb-3">
+                <ArrowRight className="w-5 h-5 text-[#E4980B]" />
+                <h3 className="text-2xl font-serif-display text-[#06042D]">Our vision</h3>
+              </div>
+              <p className="text-sm leading-relaxed text-[#666666]">
+                To be the foremost and the best in Chemicals, Environmental Services, Engineering company that compares favorably with leading industries anywhere in the world and to be the best service provider in our segment of the industry wherever we work.</p>
+            </div>
+
+            <div className="rounded-2xl bg-white border border-[#E5E5E5]/80 p-7 sm:p-9 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
+              <div className="flex items-center gap-2 mb-4">
+                <ShieldCheck className="w-5 h-5 text-[#E4980B]" />
+                <h3 className="text-2xl font-serif-display text-[#06042D]">Core values</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Quality', 'Integrity', 'Professionalism', 'Teamwork', 'Excellence'].map((value) => (
+                  <span key={value} className="rounded-full bg-[#F6F1EA] px-3 py-2 text-xs font-semibold text-[#524B44]">
+                    {value}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-[#06042D] p-7 sm:p-9 text-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+              <h3 className="text-2xl font-serif-display mb-4">Ovichem stands for</h3>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {whyUseUsPoints.map(([letter, meaning]) => (
+                  <div key={letter} className="flex items-start gap-3 text-xs leading-relaxed text-white/80">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#E4980B] font-bold text-white">{letter}</span>
+                    <span>{meaning}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
@@ -1452,19 +1471,19 @@ export default function LandingPage() {
           id="contact-bg-container"
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('${fumigationImage.src}')`,
+            backgroundImage: `url('${fumigationImage}')`,
           }}
         >
-          {/* Luminous warm taupe & sepia translucent veil matching Image 1 */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#382618]/90 via-[#4A3222]/80 to-[#2E1F14]/75" />
-          <div className="absolute inset-0 bg-[#352417]/40 backdrop-blur-[0.5px]" />
+          {/* Warm overlay keeps the image visible while protecting text contrast. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#382618]/75 via-[#4A3222]/55 to-[#2E1F14]/45" />
+          <div className="absolute inset-0 bg-[#352417]/20" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Content Area Matching Image 1 */}
-            <div className="lg:col-span-8 space-y-6">
+            <div className="lg:col-span-8 max-w-3xl space-y-6">
               
               {/* Star Rating Badge */}
               <div className="flex items-center gap-2 text-white/95">
@@ -1491,7 +1510,7 @@ export default function LandingPage() {
               </p>
 
               {/* CTA Action Buttons (Call us now + WhatsApp Us now) */}
-              <div className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
+              <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
                 <a
                   href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`}
                   className="inline-flex items-center justify-center bg-[#E4980B] hover:bg-[#990909] text-[#FFFFFF] text-sm sm:text-base font-normal px-8 py-3.5 rounded-full shadow-md shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
@@ -1517,7 +1536,7 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="grid max-w-2xl grid-cols-1 gap-3 border-t border-white/20 pt-5 text-sm text-[#F2ECE4] sm:grid-cols-2">
+              <div className="grid max-w-2xl grid-cols-1 gap-4 border-t border-white/25 pt-5 text-sm text-[#F2ECE4] sm:grid-cols-2">
                 <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="flex items-start gap-3 transition-colors hover:text-[#F0B84D]">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#F0B84D]" />
                   <span><strong className="block text-xs font-medium uppercase tracking-wider text-white/60">Call or WhatsApp</strong>{defaultPhoneNumber}</span>
@@ -1536,7 +1555,7 @@ export default function LandingPage() {
 
             {/* Right: Quick Direct WhatsApp Configurator */}
             <div className="lg:col-span-4">
-              <div className="p-6 sm:p-7 rounded-3xl bg-[#1C1612]/80 backdrop-blur-md border border-white/20 shadow-2xl space-y-4">
+              <div className="p-6 sm:p-7 rounded-3xl bg-[#1C1612]/70 backdrop-blur-md border border-white/25 shadow-2xl space-y-4">
                 <div className="space-y-1">
                   <div className="inline-flex items-center gap-1.5 text-xs text-[#F0B84D] font-medium">
                     <MessageCircle className="w-3.5 h-3.5 fill-current" />
@@ -1612,14 +1631,14 @@ export default function LandingPage() {
 
       {/* 11. VANSUL WATER TEST ARTICLE */}
       <section id="water-test-guide" className="border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32">
-        <article className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <header className="max-w-3xl space-y-5">
-            <div className="flex flex-wrap items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#990909]">
-              <span className="rounded-full bg-[#E4980B]/15 px-3 py-1">Public health awareness</span>
-              <span className="text-[#786E64]">Water safety journal</span>
+        <article className="mx-auto max-w-5xl border-t border-[#D9CEC0] px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+          <header className="max-w-4xl space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.18em]">
+              <span className="text-[#990909]">Public health awareness</span>
+              <span className="font-serif-display text-sm normal-case tracking-normal text-[#786E64]">Water safety journal</span>
             </div>
-            <h2 className="text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-6xl font-serif-display">What a colour change can tell you about your water</h2>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-y border-[#D9CEC0] py-3 text-xs text-[#786E64]">
+            <h2 className="max-w-3xl text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-6xl font-serif-display">What a colour change can tell you about your water</h2>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-y border-[#D9CEC0] py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#786E64]">
               <span>Water quality</span>
               <span>4 steps</span>
               <span>48-hour test window</span>
@@ -1821,11 +1840,7 @@ export default function LandingPage() {
                     Common Questions
                   </a>
                 </li>
-                <li>
-                  <a href="#contact" className="hover:text-[#E4980B] transition-colors">
-                    Request a quote
-                  </a>
-                </li>
+                
                 <li>
                   <a href="#" className="hover:text-[#E4980B] transition-colors">
                     Privacy policy
@@ -1921,7 +1936,7 @@ export default function LandingPage() {
 
           {/* Bottom Copyright & Trademark */}
           <div className="pt-8 border-t border-[#E5E5E5]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C837A]">
-            <p>© {new Date().getFullYear()} Ovichem Consult Ltd. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Ovichem Consult Limited. All rights reserved.</p>
             <p className="italic font-serif-display text-sm text-[#7A726A]">
               “Every space is different. The treatment should be too.”
             </p>
