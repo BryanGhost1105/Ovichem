@@ -8,7 +8,6 @@ const imagePath = (fileName: string) => `/company-photos/${fileName}`;
 const logoImage = imagePath('logo-removebg-preview.png');
 const heroImages = [
   imagePath('hero-images/engineering image.jpg'),
-  imagePath('hero-images/IMG-20260708-WA0007.jpg'),
   imagePath('hero-images/Keg1.jpg'),
   imagePath('hero-images/Keg2.jpg'),
   imagePath('hero-images/team (1).jpg'),
@@ -20,7 +19,7 @@ const waterTreatmentImage = imagePath('products (3).jpg');
 const chemicalImage = imagePath('chemical-sales/chlorine.jpg');
 const aboutImage = imagePath('about.jpg');
 const equipmentImage = imagePath('products (2).jpg');
-const marineImage = imagePath('IMG-20260708-WA0007.jpg');
+const marineImage = imagePath('products (4).jpg');
 const waterTestImage = imagePath('engineering/IMG-20260804-WA0006.jpg');
 const waterAwarenessImage = imagePath('water.jpg');
 
@@ -46,18 +45,15 @@ import {
   Phone,
   MessageCircle,
   ShieldCheck,
-  CheckCircle2,
   ChevronRight,
   Plus,
   X,
-  Star,
   MapPin,
   Clock,
   ArrowRight,
   Award,
   Layers,
   Check,
-  ZoomIn,
   Package,
   Wrench,
   Ship,
@@ -167,39 +163,6 @@ export default function LandingPage() {
   const [inquiryNeed, setInquiryNeed] = useState('Fumigation & Pest Control');
   const [inquiryLocation, setInquiryLocation] = useState('Warri, Delta State');
 
-  // Gallery & Products State
-  const [galleryFilter, setGalleryFilter] = useState<'all' | 'wip' | 'products' | 'expertise'>('all');
-  const [selectedGalleryItem, setSelectedGalleryItem] = useState<{
-    id: string;
-    category: 'wip' | 'products' | 'expertise';
-    categoryLabel: string;
-    badge: string;
-    title: string;
-    subtitle: string;
-    locationOrTier: string;
-    image: string;
-    description: string;
-    specifications: string[];
-    toolsUsed: string;
-    keyBenefit: string;
-  } | null>(null);
-
-  useEffect(() => {
-    if (!selectedGalleryItem) return;
-
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setSelectedGalleryItem(null);
-    };
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', closeOnEscape);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', closeOnEscape);
-    };
-  }, [selectedGalleryItem]);
-
   const defaultWhatsappNumber = '2348168027338';
   const defaultPhoneNumber = '+234 816 802 7338';
   const defaultEmail = 'ovichemconsultltd@yahoo.com';
@@ -213,81 +176,6 @@ export default function LandingPage() {
     );
     return `https://wa.me/${defaultWhatsappNumber}?text=${text}`;
   };
-
-  const galleryItems = [
-    {
-      id: 'env-1',
-      category: 'wip' as const,
-      categoryLabel: 'Environmental Services',
-      badge: 'Documented Project',
-      title: 'Environmental Services and Disinfestation',
-      subtitle: 'Fumigation, disinfection and decontamination for operational sites',
-      locationOrTier: 'Delta State',
-      image: fumigationImage,
-      description: 'Environmental services and disinfestation delivered for operational facilities in Delta State.',
-      specifications: [
-        'Fumigation and disinfestation',
-        'Decontamination and disinfection support',
-        'Site-specific environmental service planning',
-      ],
-      toolsUsed: 'Professional field application equipment and safety procedures',
-      keyBenefit: 'A cleaner, safer operating environment',
-    },
-    {
-      id: 'chem-1',
-      category: 'products' as const,
-      categoryLabel: 'Chemicals & Laboratory Supply',
-      badge: 'Documented Supply',
-      title: 'Industrial and Laboratory Chemicals',
-      subtitle: 'Chemical and reagent supply for industrial, laboratory and environmental applications',
-      locationOrTier: 'Delta State and Regional Supply',
-      image: chemicalImage,
-      description: 'Ovichem supplies industrial chemicals, laboratory reagents and water-treatment chemicals for multiple applications.',
-      specifications: [
-        'Methanol, Rigwash and Xylene',
-        'Chlorine, Aluminium Sulphate and Acetic Acid',
-        'Laboratory reagents, equipment and consumables',
-      ],
-      toolsUsed: 'Sourcing and supply support based on the client specification',
-      keyBenefit: 'The right materials for the work you need to complete',
-    },
-    {
-      id: 'eng-1',
-      category: 'expertise' as const,
-      categoryLabel: 'Engineering & Water Treatment',
-      badge: 'Documented Project',
-      title: 'Water Treatment Plant Installation',
-      subtitle: 'Water-treatment systems, plant installation and portable-water analysis',
-      locationOrTier: 'Warri, Delta State',
-      image: waterTreatmentImage,
-      description: 'Ovichem installs and supports water-treatment systems, including documented plant installation and portable-water analysis projects.',
-      specifications: [
-        'Water analysis and treatment recommendations',
-        'Water-treatment plant and equipment installation',
-        'Operation, maintenance and technical support',
-      ],
-      toolsUsed: 'Treatment plant equipment, testing tools and technical support',
-      keyBenefit: 'Water systems designed around the source and intended use',
-    },
-    {
-      id: 'proc-1',
-      category: 'wip' as const,
-      categoryLabel: 'Procurement & Industrial Supply',
-      badge: 'Documented Supply',
-      title: 'Pipeline Materials, Tools and Consumables',
-      subtitle: 'Materials and equipment supply for pipeline development and industrial operations',
-      locationOrTier: 'Delta State and Regional Projects',
-      image: marineImage,
-      description: 'Ovichem supplies materials, consumables and tools for pipeline development and industrial project teams.',
-      specifications: [
-        'Cutting and grinding discs, brushes and gloves',
-        'Welding hoses, electrodes and LPG heating torches',
-        'Lifting belts, shackles and project consumables',
-      ],
-      toolsUsed: 'Specification-led procurement and project delivery support',
-      keyBenefit: 'Reliable sourcing for critical project materials',
-    },
-  ];
 
   const aboutTabs = [
     {
@@ -612,9 +500,19 @@ export default function LandingPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.1, ease: 'easeInOut' }}
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url('${heroImages[activeHeroImage]}')` }}
-            />
+              className="absolute inset-0 overflow-hidden bg-[#06042D]"
+            >
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 scale-110 bg-cover bg-center bg-no-repeat blur-xl"
+                style={{ backgroundImage: `url('${heroImages[activeHeroImage]}')` }}
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+                style={{ backgroundImage: `url('${heroImages[activeHeroImage]}')` }}
+              />
+            </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-r from-[#06042D]/55 via-[#0D0A47]/45 to-[#06042D]/50" />
           <div className="absolute inset-0 bg-primary-900/15 backdrop-blur-[0.5px]" />
@@ -1007,181 +905,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 6. RECENT WORK GALLERY */}
-      <section
-        id="gallery"
-        className="scroll-mt-24 bg-[#FFFFFF] py-24 sm:py-32 border-b border-[#E5E5E5]/70"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-12 sm:mb-16">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
-                <span>Selected work</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight leading-[1.08]">
-                Recent work
-              </h2>
-            </div>
-
-          </div>
-
-          {/* Category Filter Pills Bar */}
-          <div className="flex items-center gap-2.5 overflow-x-auto pb-4 mb-10 no-scrollbar">
-            {[
-              { id: 'all', label: 'Selected Work', count: galleryItems.length },
-              { id: 'wip', label: 'Environmental Work', count: galleryItems.filter((i) => i.category === 'wip').length },
-              { id: 'products', label: 'Chemicals & Procurement', count: galleryItems.filter((i) => i.category === 'products').length },
-              { id: 'expertise', label: 'Water Treatment', count: galleryItems.filter((i) => i.category === 'expertise').length },
-            ].map((tab) => {
-              const isActive = galleryFilter === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  id={`gallery-filter-${tab.id}`}
-                  onClick={() => setGalleryFilter(tab.id as typeof galleryFilter)}
-                  className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all flex items-center gap-2 border ${
-                    isActive
-                      ? 'bg-[#06042D] text-white border-[#06042D] shadow-sm'
-                      : 'bg-white text-[#574F47] border-[#E5E5E5] hover:border-[#E4980B]/50 hover:bg-[#F7F2EA]'
-                  }`}
-                >
-                  <span>{tab.label}</span>
-                  <span
-                    className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-                      isActive ? 'bg-[#E4980B] text-white' : 'bg-[#FFFFFF] text-[#786E64]'
-                    }`}
-                  >
-                    {tab.count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Dynamic Gallery Showcase Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {galleryItems
-              .filter((item) => galleryFilter === 'all' || item.category === galleryFilter)
-              .map((item) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.25 }}
-                  key={item.id}
-                  id={`gallery-card-${item.id}`}
-                  className="p-2 rounded-2xl bg-white border border-[#E5E5E5]/80 shadow-[0_4px_16px_rgba(0,0,0,0.02)] flex flex-col justify-between group hover:border-[#E4980B]/50 hover:shadow-md transition-all duration-300"
-                >
-                  <div className="relative h-72 rounded-[calc(1rem-0.25rem)] overflow-hidden bg-[#1E1915]">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      referrerPolicy="no-referrer"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-                      <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#06042D]/80 backdrop-blur-md text-white border border-white/15">
-                        {item.badge}
-                      </span>
-                    </div>
-
-                    <button
-                      onClick={() => setSelectedGalleryItem(item)}
-                      className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white gap-2 font-medium text-xs backdrop-blur-[2px]"
-                      aria-label={`View details for ${item.title}`}
-                    >
-                      <div className="bg-[#FFFFFF] text-[#06042D] px-4 py-2 rounded-full flex items-center gap-1.5 shadow-lg transform group-hover:scale-100 scale-95 transition-transform font-semibold text-xs">
-                        <ZoomIn className="w-3.5 h-3.5 text-[#E4980B]" />
-                        <span>Inspect Details</span>
-                      </div>
-                    </button>
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center gap-1.5 text-white/90 text-xs font-medium">
-                      <MapPin className="w-3.5 h-3.5 text-[#F0B84D] shrink-0" />
-                      <span className="truncate">{item.locationOrTier}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 flex flex-col justify-between flex-1 space-y-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-semibold tracking-wider uppercase text-[#990909]">
-                          {item.categoryLabel}
-                        </span>
-                      </div>
-
-                      <h3 className="text-lg font-serif-display font-medium text-[#06042D] leading-snug">
-                        {item.title}
-                      </h3>
-
-                      <p className="text-xs text-[#666666] line-clamp-2 leading-relaxed">
-                        {item.description}
-                      </p>
-
-                      <div className="pt-2 border-t border-[#E5E5E5]/50 space-y-1.5">
-                        <div className="text-[11px] text-[#0D0A47] flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3 h-3 text-[#E4980B] shrink-0" />
-                          <span className="truncate font-medium">{item.keyBenefit}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 border-t border-[#E5E5E5]/50 flex items-center justify-between gap-2">
-                      <button
-                        onClick={() => setSelectedGalleryItem(item)}
-                        className="text-xs font-semibold text-[#8C4F2D] hover:text-[#E4980B] transition-colors flex items-center gap-1"
-                      >
-                        <span>Specifications</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-
-                      <a
-                        href={generateWhatsappUrl(item.title)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 rounded-full bg-[#FFFFFF] hover:bg-[#E4980B] text-[#0D0A47] hover:text-white border border-[#E5E5E5] transition-colors"
-                        title="Inquire on WhatsApp"
-                      >
-                        <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-          </div>
-
-          {/* Bottom Callout */}
-          <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-[#F0EDFB] border border-[#E5E5E5] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left shadow-sm">
-            <div className="space-y-1.5 max-w-2xl">
-              <h4 className="text-xl sm:text-2xl font-serif-display font-medium text-[#06042D]">
-                Need chemicals, equipment, water-treatment support, or a field service?
-              </h4>
-              <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
-                Share your specification, site requirement, or project scope and we will advise on the next practical step.
-              </p>
-            </div>
-
-            <div className="shrink-0 flex flex-col sm:flex-row items-center gap-3">
-              <a
-                href={generateWhatsappUrl('Chemical Supply & Equipment Procurement')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#E4980B] hover:bg-[#990909] text-white text-xs sm:text-sm font-normal px-7 py-3 rounded-full shadow-md shadow-black/15 transition-all"
-              >
-                <MessageCircle className="w-4 h-4 fill-current" />
-                <span>Inquire on WhatsApp</span>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       {/* 6. MINI PROJECT GALLERY */}
       <section id="project-gallery" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F8F7FC] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -1210,107 +933,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* LIGHTBOX / SPECIFICATIONS MODAL VIEWER */}
-      <AnimatePresence>
-        {selectedGalleryItem && (
-          <div
-            id="gallery-item-modal"
-            role="presentation"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#06042D]/80 p-3 sm:p-6 backdrop-blur-sm"
-            onClick={() => setSelectedGalleryItem(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2 }}
-              onClick={(e) => e.stopPropagation()}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="gallery-modal-title"
-              className="relative flex max-h-[min(760px,calc(100dvh-1.5rem))] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
-            >
-              <button
-                onClick={() => setSelectedGalleryItem(null)}
-                className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#06042D] shadow-lg ring-1 ring-black/10 transition-colors hover:bg-[#E4980B] hover:text-white"
-                aria-label="Close application details"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="relative h-44 w-full shrink-0 bg-[#1A1613] sm:h-56">
-                <Image
-                  src={selectedGalleryItem.image}
-                  alt={selectedGalleryItem.title}
-                  fill
-                  referrerPolicy="no-referrer"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-16 space-y-2 text-white">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-[#E4980B] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
-                      {selectedGalleryItem.badge}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs text-[#E8DED6]">
-                      <MapPin className="w-3.5 h-3.5 text-[#F0B84D]" />
-                      {selectedGalleryItem.locationOrTier}
-                    </span>
-                  </div>
-                  <h3 id="gallery-modal-title" className="text-2xl font-serif-display font-medium leading-tight text-white sm:text-3xl">
-                    {selectedGalleryItem.title}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="min-h-0 overflow-y-auto p-5 sm:p-7">
-                <div className="space-y-5">
-                  <div className="space-y-2">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">What this covers</p>
-                    <p className="text-sm leading-relaxed text-[#3E3833]">{selectedGalleryItem.description}</p>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl border border-[#E5E5E5] bg-[#FAF7F2] p-4">
-                      <h5 className="flex items-center gap-1.5 text-xs font-bold text-[#06042D]"><Wrench className="w-3.5 h-3.5 text-[#E4980B]" /> Method</h5>
-                      <p className="mt-2 text-xs leading-relaxed text-[#666666]">{selectedGalleryItem.toolsUsed}</p>
-                    </div>
-
-                    <div className="rounded-xl border border-[#E5E5E5] bg-[#FAF7F2] p-4">
-                      <h5 className="flex items-center gap-1.5 text-xs font-bold text-[#06042D]"><ShieldCheck className="w-3.5 h-3.5 text-[#E4980B]" /> Intended outcome</h5>
-                      <p className="mt-2 text-xs leading-relaxed text-[#666666]">{selectedGalleryItem.keyBenefit}</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">Included in the scope</p>
-                    <ul className="grid gap-2 text-xs text-[#3E3833] sm:grid-cols-2">
-                      {selectedGalleryItem.specifications.map((spec, i) => (
-                        <li key={i} className="flex items-start gap-2 rounded-lg border border-[#E5E5E5] p-2.5"><Check className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" /><span>{spec}</span></li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex flex-col gap-3 border-t border-[#E5E5E5] bg-white pt-5 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs text-[#786E64]">Need this service or supply for your project?</p>
-                  <a
-                    id="modal-whatsapp-cta"
-                    href={generateWhatsappUrl(selectedGalleryItem.title)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E4980B] px-6 py-3 text-xs font-semibold text-white shadow-md shadow-black/15 transition-all hover:bg-[#990909] sm:w-auto"
-                  >
-                    <MessageCircle className="w-4 h-4 fill-current" />
-                    <span>Discuss this requirement</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       {/* 6. ABOUT US SECTION */}
       <section id="about" className="scroll-mt-24 py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#E5E5E5]/60">
@@ -1418,7 +1040,7 @@ export default function LandingPage() {
                 <h3 className="text-2xl font-serif-display text-[#06042D]">Our mission</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#666666]">
-                To provide valued, excellent and professional chemical, environmental and engineering services while protecting personnel, equipment and the environment.
+                Our mission is to provide valued, excellent and professional services to our clients in the area of chemicals, Environmental Services and Engineering company, taking coqnizance of the safety and protection of personnel, equipment, and the environment
               </p>
             </div>
 
@@ -1436,11 +1058,12 @@ export default function LandingPage() {
                 <ShieldCheck className="w-5 h-5 text-[#E4980B]" />
                 <h3 className="text-2xl font-serif-display text-[#06042D]">Core values</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="space-y-3">
                 {['Quality', 'Integrity', 'Professionalism', 'Teamwork', 'Excellence'].map((value) => (
-                  <span key={value} className="rounded-full bg-[#F6F1EA] px-3 py-2 text-xs font-semibold text-[#524B44]">
+                  <div key={value} className="flex items-center gap-3 border-b border-[#E5E5E5] pb-3 text-sm font-semibold text-[#524B44] last:border-b-0 last:pb-0">
+                    <Check className="h-4 w-4 shrink-0 text-[#E4980B]" strokeWidth={2.5} />
                     {value}
-                  </span>
+                  </div>
                 ))}
               </div>
             </div>
@@ -1464,52 +1087,118 @@ export default function LandingPage() {
       {/* 8. DIRECT CONTACT SECTION */}
       <section
         id="contact"
-        className="scroll-mt-24 relative min-h-[580px] lg:min-h-[640px] flex flex-col justify-center overflow-hidden text-white"
+        className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32"
       >
-        {/* Background Image of Technician in Action with Warm Atmospheric Overlay (Exact Match to Image 1) */}
-        <div
-          id="contact-bg-container"
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('${fumigationImage}')`,
-          }}
-        >
-          {/* Warm overlay keeps the image visible while protecting text contrast. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#382618]/75 via-[#4A3222]/55 to-[#2E1F14]/45" />
-          <div className="absolute inset-0 bg-[#352417]/20" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Content Area Matching Image 1 */}
-            <div className="lg:col-span-8 max-w-3xl space-y-6">
-              
-              {/* Star Rating Badge */}
-              <div className="flex items-center gap-2 text-white/95">
-                <div className="flex items-center gap-0.5 text-[#F5A623]">
-                  <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
-                  <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
-                  <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
-                  <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
-                  <Star className="w-4 h-4 fill-[#F5A623] stroke-none" />
-                </div>
-                <span className="text-xs sm:text-sm font-normal text-[#F2ECE4] tracking-wide ml-1">
-                  Fumigation, water treatment &amp; chemical supply
-                </span>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="space-y-6 lg:col-span-6">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">Contact us</p>
+                <h2 className="max-w-xl text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-6xl font-serif-display">
+                  Let&apos;s discuss the work ahead.
+                </h2>
+                <p className="max-w-xl text-sm leading-relaxed text-[#666666] sm:text-base">
+                  Tell us what you need and our team will help you choose the right environmental service, water-treatment solution, chemical supply, or engineering support.
+                </p>
               </div>
 
-              {/* Main Headline */}
-              <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif-display text-[#FFFFFF] leading-[1.05] tracking-tight font-normal max-w-2xl drop-shadow-sm">
-                Need help with pests, water, or treatment chemicals?
-              </h2>
+              <div className="space-y-5 border-y border-[#D9CEC0] py-6 text-sm text-[#524B44]">
+                <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="flex items-start gap-3 transition-colors hover:text-[#990909]">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
+                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Call or WhatsApp</strong>{defaultPhoneNumber}</span>
+                </a>
+                <a href={`mailto:${defaultEmail}`} className="flex items-start gap-3 transition-colors hover:text-[#990909]">
+                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
+                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Email</strong>{defaultEmail}</span>
+                </a>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
+                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Visit us</strong>Suite 1-03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.</span>
+                </div>
+              </div>
 
-              {/* Subtitle */}
-              <p className="text-sm sm:text-base md:text-lg text-[#EAE3DB] font-normal leading-relaxed max-w-2xl drop-shadow-sm">
-                Whether you need an environmental service, water-treatment solution, chemical supply, procurement support, or engineering help, tell us what the job requires and we will guide you to the next step.
-              </p>
+              <a
+                href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#06042D] px-7 py-3.5 text-sm font-medium text-white shadow-md transition-colors hover:bg-[#990909]"
+              >
+                <Phone className="h-4 w-4" />
+                <span>Call us now</span>
+              </a>
+            </div>
 
-              {/* CTA Action Buttons (Call us now + WhatsApp Us now) */}
+            <div className="lg:col-span-6">
+              <div className="rounded-2xl border border-[#E5E5E5] bg-white p-6 shadow-[0_10px_30px_rgba(6,4,45,0.06)] sm:p-8">
+                <div className="mb-6 space-y-1">
+                  <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#990909]">
+                    <MessageCircle className="h-3.5 w-3.5 text-[#E4980B]" />
+                    WhatsApp dispatch
+                  </p>
+                  <h3 className="text-2xl text-[#06042D] font-serif-display">Send a quick request</h3>
+                  <p className="text-xs leading-relaxed text-[#786E64]">Choose a service and location, then continue the conversation on WhatsApp.</p>
+                </div>
+
+                <div className="space-y-4 text-xs">
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-[#524B44]">Property type</label>
+                    <select
+                      value={inquirySpace}
+                      onChange={(e) => setInquirySpace(e.target.value)}
+                      className="w-full rounded-xl border border-[#D9CEC0] bg-[#FAF7F2] px-3 py-3 text-[#524B44] focus:border-[#E4980B] focus:outline-none"
+                    >
+                      <option value="Domestic Home / Residence">Domestic Home / Residence</option>
+                      <option value="Corporate Office">Corporate Office</option>
+                      <option value="Guest House / Hospitality">Guest House / Hospitality</option>
+                      <option value="Boat or Houseboat">Boat or Houseboat (Marine)</option>
+                      <option value="Marine Facility / Jetty">Marine Facility / Jetty</option>
+                      <option value="Commercial Facility">Commercial Facility</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-[#524B44]">Service needed</label>
+                    <select
+                      value={inquiryNeed}
+                      onChange={(e) => setInquiryNeed(e.target.value)}
+                      className="w-full rounded-xl border border-[#D9CEC0] bg-[#FAF7F2] px-3 py-3 text-[#524B44] focus:border-[#E4980B] focus:outline-none"
+                    >
+                      <option value="Environmental Services">Environmental Services</option>
+                      <option value="Water Treatment">Water Treatment</option>
+                      <option value="Chemicals & Laboratory Supply">Chemicals &amp; Laboratory Supply</option>
+                      <option value="Procurement & Industrial Supply">Procurement &amp; Industrial Supply</option>
+                      <option value="Technical Consultancy">Technical Consultancy</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-[#524B44]">Location</label>
+                    <input
+                      type="text"
+                      value={inquiryLocation}
+                      onChange={(e) => setInquiryLocation(e.target.value)}
+                      placeholder="e.g. Warri, Delta State"
+                      className="w-full rounded-xl border border-[#D9CEC0] bg-[#FAF7F2] px-3 py-3 text-[#524B44] placeholder:text-[#A59A8D] focus:border-[#E4980B] focus:outline-none"
+                    />
+                  </div>
+
+                  <a
+                    id="direct-dispatch-whatsapp-btn"
+                    href={generateWhatsappUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#E4980B] py-3.5 font-semibold text-white shadow-md transition-colors hover:bg-[#990909]"
+                  >
+                    <MessageCircle className="h-4 w-4 fill-current" />
+                    <span>Continue on WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. VANSUL WATER TEST ARTICLE */}
+      {/*
               <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
                 <a
                   href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`}
@@ -1528,7 +1217,7 @@ export default function LandingPage() {
                 </a>
               </div>
 
-              {/* Location & Operating Scope */}
+              Location & Operating Scope
               <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-[#DDD3C8]">
                 <div className="flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#F0B84D]" />
@@ -1553,7 +1242,7 @@ export default function LandingPage() {
 
             </div>
 
-            {/* Right: Quick Direct WhatsApp Configurator */}
+            Right: Quick Direct WhatsApp Configurator
             <div className="lg:col-span-4">
               <div className="p-6 sm:p-7 rounded-3xl bg-[#1C1612]/70 backdrop-blur-md border border-white/25 shadow-2xl space-y-4">
                 <div className="space-y-1">
@@ -1627,9 +1316,7 @@ export default function LandingPage() {
 
           </div>
         </div>
-      </section>
-
-      {/* 11. VANSUL WATER TEST ARTICLE */}
+      </section> */}
       <section id="water-test-guide" className="border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32">
         <article className="mx-auto max-w-5xl border-t border-[#D9CEC0] px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
           <header className="max-w-4xl space-y-6">
