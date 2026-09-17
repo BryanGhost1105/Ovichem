@@ -3,6 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
+import fumigationImage from '../assets/company photos/EnvironmentalImg.jpeg';
+import projectSuppliesImage from '../assets/company photos/pump2.jpeg';
+import waterTreatmentSuppliesImage from '../assets/company photos/products (9).jpg';
+import chemicalChem2Image from '../assets/company photos/chemicals img/chem2.jpeg';
+import chemicalMethanolImage from '../assets/company photos/chemicals img/methanol.jpeg';
+import environmentalImage from '../assets/company photos/environmental img/eniviron img.jpeg';
+import environmentalFumigationImage from '../assets/company photos/environmental img/fumigation image.jpg';
+import environmentalFieldImage from '../assets/company photos/environmental img/IMG-20260708-WA0003.jpg';
+import environmentalTeamImage from '../assets/company photos/environmental img/team (2).jpg';
+import environmentalWorkImage from '../assets/company photos/environmental img/work in progress (3).jpg';
 
 const imagePath = (fileName: string) => `/company-photos/${fileName}`;
 const logoImage = imagePath('logo-removebg-preview.png');
@@ -14,26 +24,36 @@ const heroImages = [
   imagePath('hero-images/team (2).jpg'),
   imagePath('hero-images/work in progress (8).jpg'),
 ];
-const fumigationImage = imagePath('work in progress (1).jpg');
-const waterTreatmentImage = imagePath('products (3).jpg');
+const waterTreatmentImage = waterTreatmentSuppliesImage;
 const chemicalImage = imagePath('chemical-sales/chlorine.jpg');
 const aboutImage = imagePath('about.jpg');
-const equipmentImage = imagePath('products (2).jpg');
-const marineImage = imagePath('products (4).jpg');
+const equipmentImage = imagePath('IMG-20260708-WA0001.jpg');
+const marineImage = projectSuppliesImage;
 const waterTestImage = imagePath('engineering/IMG-20260804-WA0006.jpg');
 const waterAwarenessImage = imagePath('water.jpg');
+const environmentalGalleryImages = [
+  fumigationImage,
+  imagePath('eniviron img.jpeg'),
+];
+const waterTreatmentGalleryImages = [
+  waterTreatmentImage,
+  imagePath('products (10).jpg'),
+];
 
 const chemicalSalesImages = [
   imagePath('chemical-sales/chlorine.jpg'),
   imagePath('chemical-sales/Keg1.jpg'),
   imagePath('chemical-sales/Keg2.jpg'),
   imagePath('chemical-sales/products (8).jpg'),
+  chemicalMethanolImage,
+  chemicalChem2Image,
 ];
 const environmentalServicesImages = [
-  imagePath('environmental-services/fumigation image.jpg'),
-  imagePath('environmental-services/IMG-20260708-WA0003.jpg'),
-  imagePath('environmental-services/team (2).jpg'),
-  imagePath('environmental-services/work in progress (3).jpg'),
+  environmentalImage,
+  environmentalFumigationImage,
+  environmentalFieldImage,
+  environmentalTeamImage,
+  environmentalWorkImage,
 ];
 const engineeringImages = [
   imagePath('engineering/IMG-20260804-WA0005.jpg'),
@@ -67,6 +87,8 @@ export default function LandingPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [activeChemicalSalesImage, setActiveChemicalSalesImage] = useState(0);
   const [activeEnvironmentalServicesImage, setActiveEnvironmentalServicesImage] = useState(0);
+  const [activeEnvironmentalGalleryImage, setActiveEnvironmentalGalleryImage] = useState(0);
+  const [activeWaterTreatmentGalleryImage, setActiveWaterTreatmentGalleryImage] = useState(0);
   const [activeEngineeringImage, setActiveEngineeringImage] = useState(0);
   const [activeHeroImage, setActiveHeroImage] = useState(0);
 
@@ -75,6 +97,8 @@ export default function LandingPage() {
       setActiveHeroImage((current) => (current + 1) % heroImages.length);
       setActiveChemicalSalesImage((current) => (current + 1) % chemicalSalesImages.length);
       setActiveEnvironmentalServicesImage((current) => (current + 1) % environmentalServicesImages.length);
+      setActiveEnvironmentalGalleryImage((current) => (current + 1) % environmentalGalleryImages.length);
+      setActiveWaterTreatmentGalleryImage((current) => (current + 1) % waterTreatmentGalleryImages.length);
       setActiveEngineeringImage((current) => (current + 1) % engineeringImages.length);
     }, 3800);
 
@@ -182,19 +206,7 @@ export default function LandingPage() {
       id: 0,
       title: 'Experienced & practical specialists',
       description:
-        'With around a decade of active field experience in Warri and Delta State, our specialists are trained to identify infestation sources, physical layout challenges, and water treatment requirements. We focus on practical, root-cause treatment rather than superficial spraying.',
-    },
-    {
-      id: 1,
-      title: 'Safe treatments for families & businesses',
-      description:
-        'We select quality, approved treatment chemicals and methods suited for occupied homes, offices, and guest houses. Our protocols prioritize the safety of residents, staff, children, and pets with proper re-entry guidelines.',
-    },
-    {
-      id: 2,
-      title: 'Tailored solutions for every property',
-      description:
-        'A home is not the same as a boat. A guest house is not the same as an office. Ovichem assesses the specific environment first—taking note of airflow, dampness, and building materials—to determine the exact chemical formulation and method needed.',
+        'Ovichem Consult Limited is a Nigerian chemical, environmental and engineering servicing company with experience in providing industrial and laboratory chemical supplies/support services, water treatment solutions, environmental monitoring and auditing, and technical engineering support services.The company has developed practical experience in water quality assessment and treatment, borehole water treatment, water treatment plant installation and maintenance, environmental inspection and monitoring, air quality and noise assessment, environmental audit reporting, sanitation, disinfection and pest-control support services. ',
     },
   ];
 
@@ -209,7 +221,7 @@ export default function LandingPage() {
   ];
 
   const productItems = [
-    { name: 'Industrial chemicals', description: 'Methanol, rigwash, xylene, chlorine, aluminium sulphate and acetic acid.', image: chemicalImage },
+    { name: 'Industrial chemicals', description: 'Methanol, rigwash, xylene, chlorine, aluminium sulphate, acetic acid etc.', image: chemicalImage },
     { name: 'Laboratory supplies', description: 'Laboratory chemicals, reagents, equipment and everyday testing items.', image: equipmentImage },
     { name: 'Water-treatment supplies', description: 'Water-treatment products, treatment plants, pumps and related equipment.', image: waterTreatmentImage },
     { name: 'Project supplies', description: 'Tools, general consumables and materials for industrial work.', image: marineImage },
@@ -338,7 +350,7 @@ export default function LandingPage() {
                   : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
               }`}
             >
-              Who we are
+              About Us
             </a>
             <a
               href="#services"
@@ -434,7 +446,7 @@ export default function LandingPage() {
                       : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  Who we are
+                  About Us
                 </a>
                 <a
                   href="#services"
@@ -627,7 +639,11 @@ export default function LandingPage() {
               <div className="relative h-80 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-primary-900">
                 <AnimatePresence initial={false}>
                   <motion.div
-                    key={environmentalServicesImages[activeEnvironmentalServicesImage]}
+                    key={
+                      typeof environmentalServicesImages[activeEnvironmentalServicesImage] === 'string'
+                        ? environmentalServicesImages[activeEnvironmentalServicesImage]
+                        : environmentalServicesImages[activeEnvironmentalServicesImage].src
+                    }
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -780,7 +796,11 @@ export default function LandingPage() {
               <div className="relative h-80 rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[#1E2E28]">
                 <AnimatePresence initial={false}>
                   <motion.div
-                    key={chemicalSalesImages[activeChemicalSalesImage]}
+                    key={
+                      typeof chemicalSalesImages[activeChemicalSalesImage] === 'string'
+                        ? chemicalSalesImages[activeChemicalSalesImage]
+                        : chemicalSalesImages[activeChemicalSalesImage].src
+                    }
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -919,9 +939,9 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
-              { image: fumigationImage, label: 'Environmental services' },
-              { image: waterTreatmentImage, label: 'Water treatment' },
-              { image: chemicalImage, label: 'Chemical supply' },
+              { image: environmentalGalleryImages[activeEnvironmentalGalleryImage], label: 'Environmental services' },
+              { image: waterTreatmentGalleryImages[activeWaterTreatmentGalleryImage], label: 'Water treatment' },
+              { image: imagePath('methanol.jpeg'), label: 'Chemical supply' },
             ].map((item) => (
               <div key={item.label} className="relative h-72 overflow-hidden rounded-2xl bg-[#06042D] sm:h-80">
                 <Image src={item.image} alt={item.label} fill className="object-cover transition-transform duration-700 hover:scale-105" />
@@ -951,11 +971,9 @@ export default function LandingPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/15 text-white">
-                    <span className="text-[10px] font-semibold tracking-wider uppercase text-[#E39D78] block">
-                      Warri, Delta State Headquarters
-                    </span>
+                    
                     <p className="text-xs text-[#E0D7CE] mt-0.5">
-                      Around a decade of practical treatment and chemical work across the Niger Delta.
+                      More than a decade of practical treatment and chemical work across Nigeria.
                     </p>
                   </div>
                 </div>
@@ -972,7 +990,7 @@ export default function LandingPage() {
               </h2>
 
               <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
-                  Ovichem Consult Limited is an indigenous Chemical, Environmental Science and Engineering Company. We provide quality, reliable, and cost-effective solutions to industries and individuals from our base in Effurun-Warri, Delta State.
+                  Ovichem Consult Limited is an indigenous Chemical, Environmental Services and Engineering Company. We provide quality, reliable, and cost-effective solutions to multiple industries.
               </p>
 
               <div className="space-y-4 pt-2">
@@ -1040,7 +1058,7 @@ export default function LandingPage() {
                 <h3 className="text-2xl font-serif-display text-[#06042D]">Our mission</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#666666]">
-                Our mission is to provide valued, excellent and professional services to our clients in the area of chemicals, Environmental Services and Engineering company, taking coqnizance of the safety and protection of personnel, equipment, and the environment
+                Our mission is to provide valued, excellent and professional services to our clients in the area of Chemicals, Environmental Services and Engineering, taking coqnizance of the safety and protection of personnel, equipment, and the environment
               </p>
             </div>
 
@@ -1050,7 +1068,7 @@ export default function LandingPage() {
                 <h3 className="text-2xl font-serif-display text-[#06042D]">Our vision</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#666666]">
-                To be the foremost and the best in Chemicals, Environmental Services, Engineering company that compares favorably with leading industries anywhere in the world and to be the best service provider in our segment of the industry wherever we work.</p>
+                To be the foremost and the best Chemicals, Environmental Services, and Engineering company that compares favorably with leading industries anywhere in the world and to be the best service provider in our segment of the industry wherever we work.</p>
             </div>
 
             <div className="rounded-2xl bg-white border border-[#E5E5E5]/80 p-7 sm:p-9 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
@@ -1095,10 +1113,10 @@ export default function LandingPage() {
               <div className="space-y-3">
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">Contact us</p>
                 <h2 className="max-w-xl text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-6xl font-serif-display">
-                  Let&apos;s discuss the work ahead.
+                  Let&apos;s discuss.....
                 </h2>
                 <p className="max-w-xl text-sm leading-relaxed text-[#666666] sm:text-base">
-                  Tell us what you need and our team will help you choose the right environmental service, water-treatment solution, chemical supply, or engineering support.
+                  Tell us what you need and our team will help you choose the right optimal solution.
                 </p>
               </div>
 
@@ -1113,7 +1131,7 @@ export default function LandingPage() {
                 </a>
                 <div className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
-                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Visit us</strong>Suite 1-03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.</span>
+                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Visit us at</strong>Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.</span>
                 </div>
               </div>
 
@@ -1126,359 +1144,11 @@ export default function LandingPage() {
               </a>
             </div>
 
-            <div className="lg:col-span-6">
-              <div className="rounded-2xl border border-[#E5E5E5] bg-white p-6 shadow-[0_10px_30px_rgba(6,4,45,0.06)] sm:p-8">
-                <div className="mb-6 space-y-1">
-                  <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#990909]">
-                    <MessageCircle className="h-3.5 w-3.5 text-[#E4980B]" />
-                    WhatsApp dispatch
-                  </p>
-                  <h3 className="text-2xl text-[#06042D] font-serif-display">Send a quick request</h3>
-                  <p className="text-xs leading-relaxed text-[#786E64]">Choose a service and location, then continue the conversation on WhatsApp.</p>
-                </div>
-
-                <div className="space-y-4 text-xs">
-                  <div className="space-y-1.5">
-                    <label className="font-semibold text-[#524B44]">Property type</label>
-                    <select
-                      value={inquirySpace}
-                      onChange={(e) => setInquirySpace(e.target.value)}
-                      className="w-full rounded-xl border border-[#D9CEC0] bg-[#FAF7F2] px-3 py-3 text-[#524B44] focus:border-[#E4980B] focus:outline-none"
-                    >
-                      <option value="Domestic Home / Residence">Domestic Home / Residence</option>
-                      <option value="Corporate Office">Corporate Office</option>
-                      <option value="Guest House / Hospitality">Guest House / Hospitality</option>
-                      <option value="Boat or Houseboat">Boat or Houseboat (Marine)</option>
-                      <option value="Marine Facility / Jetty">Marine Facility / Jetty</option>
-                      <option value="Commercial Facility">Commercial Facility</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="font-semibold text-[#524B44]">Service needed</label>
-                    <select
-                      value={inquiryNeed}
-                      onChange={(e) => setInquiryNeed(e.target.value)}
-                      className="w-full rounded-xl border border-[#D9CEC0] bg-[#FAF7F2] px-3 py-3 text-[#524B44] focus:border-[#E4980B] focus:outline-none"
-                    >
-                      <option value="Environmental Services">Environmental Services</option>
-                      <option value="Water Treatment">Water Treatment</option>
-                      <option value="Chemicals & Laboratory Supply">Chemicals &amp; Laboratory Supply</option>
-                      <option value="Procurement & Industrial Supply">Procurement &amp; Industrial Supply</option>
-                      <option value="Technical Consultancy">Technical Consultancy</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="font-semibold text-[#524B44]">Location</label>
-                    <input
-                      type="text"
-                      value={inquiryLocation}
-                      onChange={(e) => setInquiryLocation(e.target.value)}
-                      placeholder="e.g. Warri, Delta State"
-                      className="w-full rounded-xl border border-[#D9CEC0] bg-[#FAF7F2] px-3 py-3 text-[#524B44] placeholder:text-[#A59A8D] focus:border-[#E4980B] focus:outline-none"
-                    />
-                  </div>
-
-                  <a
-                    id="direct-dispatch-whatsapp-btn"
-                    href={generateWhatsappUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#E4980B] py-3.5 font-semibold text-white shadow-md transition-colors hover:bg-[#990909]"
-                  >
-                    <MessageCircle className="h-4 w-4 fill-current" />
-                    <span>Continue on WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* 11. VANSUL WATER TEST ARTICLE */}
-      {/*
-              <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
-                <a
-                  href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`}
-                  className="inline-flex items-center justify-center bg-[#E4980B] hover:bg-[#990909] text-[#FFFFFF] text-sm sm:text-base font-normal px-8 py-3.5 rounded-full shadow-md shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
-                >
-                  <span>Call us now</span>
-                </a>
-
-                <a
-                  href={generateWhatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center bg-[#3D2D22]/40 hover:bg-[#3D2D22]/65 text-[#FFFFFF] border border-white/40 hover:border-white/60 text-sm sm:text-base font-normal px-8 py-3.5 rounded-full backdrop-blur-sm transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-center"
-                >
-                  <span>WhatsApp Us now</span>
-                </a>
-              </div>
-
-              Location & Operating Scope
-              <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-[#DDD3C8]">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#F0B84D]" />
-                  <span>Warri &amp; Delta State Headquarters</span>
-                </div>
-              </div>
-
-              <div className="grid max-w-2xl grid-cols-1 gap-4 border-t border-white/25 pt-5 text-sm text-[#F2ECE4] sm:grid-cols-2">
-                <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="flex items-start gap-3 transition-colors hover:text-[#F0B84D]">
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#F0B84D]" />
-                  <span><strong className="block text-xs font-medium uppercase tracking-wider text-white/60">Call or WhatsApp</strong>{defaultPhoneNumber}</span>
-                </a>
-                <a href={`mailto:${defaultEmail}`} className="flex items-start gap-3 transition-colors hover:text-[#F0B84D]">
-                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#F0B84D]" />
-                  <span><strong className="block text-xs font-medium uppercase tracking-wider text-white/60">Email</strong>{defaultEmail}</span>
-                </a>
-                <div className="flex items-start gap-3 sm:col-span-2">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#F0B84D]" />
-                  <span><strong className="block text-xs font-medium uppercase tracking-wider text-white/60">Visit us</strong>Suite 1-03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.</span>
-                </div>
-              </div>
-
-            </div>
-
-            Right: Quick Direct WhatsApp Configurator
-            <div className="lg:col-span-4">
-              <div className="p-6 sm:p-7 rounded-3xl bg-[#1C1612]/70 backdrop-blur-md border border-white/25 shadow-2xl space-y-4">
-                <div className="space-y-1">
-                  <div className="inline-flex items-center gap-1.5 text-xs text-[#F0B84D] font-medium">
-                    <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                    <span>Quick WhatsApp Dispatch</span>
-                  </div>
-                  <h3 className="text-xl font-serif-display font-medium text-white">
-                    Direct Service Request
-                  </h3>
-                </div>
-
-                <div className="space-y-3 text-xs">
-                  <div className="space-y-1">
-                    <label className="text-[#D0C4BA] font-medium">Property Type:</label>
-                    <select
-                      value={inquirySpace}
-                      onChange={(e) => setInquirySpace(e.target.value)}
-                      className="w-full bg-[#2A201A] border border-white/20 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E4980B]"
-                    >
-                      <option value="Domestic Home / Residence">Domestic Home / Residence</option>
-                      <option value="Corporate Office">Corporate Office</option>
-                      <option value="Guest House / Hospitality">Guest House / Hospitality</option>
-                      <option value="Boat or Houseboat">Boat or Houseboat (Marine)</option>
-                      <option value="Marine Facility / Jetty">Marine Facility / Jetty</option>
-                      <option value="Commercial Facility">Commercial Facility</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[#D0C4BA] font-medium">Service Needed:</label>
-                    <select
-                      value={inquiryNeed}
-                      onChange={(e) => setInquiryNeed(e.target.value)}
-                      className="w-full bg-[#2A201A] border border-white/20 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E4980B]"
-                    >
-                      <option value="Environmental Services">Environmental Services</option>
-                      <option value="Water Treatment">Water Treatment</option>
-                      <option value="Chemicals & Laboratory Supply">Chemicals &amp; Laboratory Supply</option>
-                      <option value="Procurement & Industrial Supply">Procurement &amp; Industrial Supply</option>
-                      <option value="Technical Consultancy">Technical Consultancy</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[#D0C4BA] font-medium">Location:</label>
-                    <input
-                      type="text"
-                      value={inquiryLocation}
-                      onChange={(e) => setInquiryLocation(e.target.value)}
-                      placeholder="e.g. Warri, Delta State"
-                      className="w-full bg-[#2A201A] border border-white/20 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#E4980B]"
-                    />
-                  </div>
-
-                  <div className="pt-2">
-                    <a
-                      id="direct-dispatch-whatsapp-btn"
-                      href={generateWhatsappUrl()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-[#E4980B] hover:bg-[#990909] text-white font-medium py-3 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all transform active:scale-[0.99] text-xs"
-                    >
-                      <MessageCircle className="w-4 h-4 fill-current" />
-                      <span>Send Direct to WhatsApp</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section> */}
-      <section id="water-test-guide" className="border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32">
-        <article className="mx-auto max-w-5xl border-t border-[#D9CEC0] px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
-          <header className="max-w-4xl space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-3 text-[10px] font-semibold uppercase tracking-[0.18em]">
-              <span className="text-[#990909]">Public health awareness</span>
-              <span className="font-serif-display text-sm normal-case tracking-normal text-[#786E64]">Water safety journal</span>
-            </div>
-            <h2 className="max-w-3xl text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-6xl font-serif-display">What a colour change can tell you about your water</h2>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-y border-[#D9CEC0] py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#786E64]">
-              <span>Water quality</span>
-              <span>4 steps</span>
-              <span>48-hour test window</span>
-            </div>
-              <div className="grid gap-6 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:items-end">
-                <div className="grid grid-cols-2 gap-3">
-                  <figure className="space-y-2">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#06042D]">
-                      <Image src={waterAwarenessImage} alt="Water viewed as part of a water safety awareness article" fill className="object-cover" />
-                    </div>
-                    <figcaption className="text-[10px] font-semibold uppercase tracking-wider text-[#786E64]">The water we use</figcaption>
-                  </figure>
-                  <figure className="space-y-2">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#06042D]">
-                      <Image src={waterTestImage} alt="Water sample prepared for a bacteria test" fill className="object-cover" />
-                    </div>
-                    <figcaption className="text-[10px] font-semibold uppercase tracking-wider text-[#786E64]">The water we test</figcaption>
-                  </figure>
-                </div>
-                <p className="max-w-2xl text-base leading-relaxed text-[#524B44] sm:text-lg">A water source can look clear and still require attention. The Vansul bacteria test offers a simple first check for coliform bacteria, helping you know when to seek professional confirmation and treatment advice.</p>
-              </div>
-          </header>
-
-          <div className="mt-12 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <div className="space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">Know before you drink</p>
-              <p className="text-sm leading-relaxed text-[#666666]">Follow the sequence carefully, allow the full waiting period, and compare the final colour with the vial colour code. A green or blue result may indicate coliform bacteria are present.</p>
-              <a href={generateWhatsappUrl('Vansul bacteria test and water analysis')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-[#990909] transition-colors hover:text-[#E4980B]">
-                <MessageCircle className="h-4 w-4" /> Ask about water analysis <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-            <div className="divide-y divide-[#D9CEC0] border-y border-[#D9CEC0]">
-              {[
-                ['01', 'Add the powder', 'Open the foil bag and pour the test powder into the vial.'],
-                ['02', 'Add the sample', 'Pour 50 ml of sample water into the vial and tighten the cap.'],
-                ['03', 'Shake and wait', 'Shake to dissolve, then keep sealed at 68°F–90°F for 48 hours.'],
-                ['04', 'Read the colour', 'Compare the sample with the vial colour code. Green or blue indicates coliform bacteria may be present.'],
-              ].map(([number, title, description]) => (
-                <div key={number} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5 sm:grid-cols-[3rem_1fr]">
-                  <span className="text-sm font-semibold text-[#E4980B]">{number}</span>
-                  <div className="space-y-1.5">
-                    <h3 className="text-xl text-[#06042D] font-serif-display">{title}</h3>
-                    <p className="text-sm leading-relaxed text-[#666666]">{description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <aside className="mt-10 border-l-4 border-[#990909] bg-white p-5 sm:p-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">Positive result</p>
-            <p className="mt-2 text-sm leading-relaxed text-[#524B44]">Add bleach and dispose of the sample safely, wash your hands, treat the water as unsafe, and contact your local health department for bacterial confirmation.</p>
-          </aside>
-        </article>
-      </section>
-
-      {/* 12. FREQUENTLY ASKED QUESTIONS SECTION (Matching Image 2) */}
-      <section id="faq" className="py-24 sm:py-32 bg-[#FFFFFF] border-b border-[#E5E5E5]/70">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            
-            {/* Left Column: FAQs pill + Large Serif Title (Exact Match to Image 2) */}
-            <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-28">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D0CDD8] text-[#7A726A] text-xs font-semibold uppercase tracking-wider shadow-sm">
-                FAQs
-              </div>
-
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight leading-[1.08]">
-                Frequently Asked Questions
-              </h2>
-            </div>
-
-            {/* Right Column: Intro text + Accordion List (Exact Match to Image 2) */}
-            <div className="lg:col-span-7 space-y-8">
-              <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
-                Have questions about pest control, fumigation, treatment safety, or pricing? Here are answers to some of the questions we hear most often from homeowners and businesses.
-              </p>
-
-              {/* Accordion Group */}
-              <div className="space-y-4">
-                {faqItems.map((faq, index) => {
-                  const isOpen = openFaqIndex === index;
-                  return (
-                    <div
-                      key={index}
-                      className={`transition-all duration-200 rounded-2xl ${
-                        isOpen
-                          ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E5E5E5]/80 p-6'
-                          : 'border-b border-[#E5E5E5] py-5 px-2 hover:bg-black/[0.01]'
-                      }`}
-                    >
-                      <button
-                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                        className="w-full flex items-center justify-between gap-4 text-left focus:outline-none"
-                        aria-expanded={isOpen}
-                      >
-                        <span
-                          className={`text-lg sm:text-xl font-serif-display font-medium transition-colors ${
-                            isOpen ? 'text-[#06042D]' : 'text-[#2E2823] hover:text-[#E4980B]'
-                          }`}
-                        >
-                          {faq.question}
-                        </span>
-
-                        <div
-                          className={`w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors ${
-                            isOpen
-                              ? 'bg-[#F0EDFB] text-[#554D46]'
-                              : 'text-[#8C837A] hover:text-[#06042D]'
-                          }`}
-                        >
-                          {isOpen ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                        </div>
-                      </button>
-
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25 }}
-                            className="overflow-hidden"
-                          >
-                            <p className="pt-3 text-xs sm:text-sm text-[#666666] leading-relaxed">
-                              {faq.answer}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Bottom FAQ Help Note */}
-              <div className="pt-4 flex items-center gap-2 text-xs text-[#7A726A]">
-                <span>Have a question not listed here?</span>
-                <a
-                  href={generateWhatsappUrl('FAQ Question Inquiry')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-[#E4980B] hover:text-[#990909] underline transition-colors"
-                >
-                  Ask us directly on WhatsApp
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
+     
       {/* 12. RESTYLED FOOTER (Exact Match to Image 3 Style: Light Minimalist Editorial) */}
       <footer className="bg-[#FFFFFF] text-[#666666] border-t border-[#E5E5E5]/70 pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -1490,10 +1160,6 @@ export default function LandingPage() {
               <a href="#" className="flex items-center gap-3 group focus:outline-none">
                 <Image src={logoImage} alt="Ovichem Consult Limited logo" width={180} height={82} className="h-16 w-auto object-contain" unoptimized />
               </a>
-
-              <p className="text-xs sm:text-sm text-[#666666] leading-relaxed max-w-sm">
-                Fumigation services, water treatment, and fumigative chemical supply for residential, commercial, and marine clients in Warri and across Delta State.
-              </p>
             </div>
 
             {/* Col 2: All pages (Exact Match to Image 3) */}
