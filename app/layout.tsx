@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   title: 'Ovichem Consult Ltd | Chemical, Environmental & Engineering Services',
   description:
     'Ovichem Consult Limited provides quality chemicals, environmental services, water treatment, and engineering support from Effurun-Warri, Delta State.',
+  icons: {
+    icon: '/company-photos/logo-removebg-preview.png',
+    apple: '/company-photos/logo-removebg-preview.png',
+  },
   keywords: [
     'fumigation services in Warri',
     'pest control Delta State',
