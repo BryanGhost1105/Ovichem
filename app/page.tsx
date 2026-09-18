@@ -7,12 +7,24 @@ import fumigationImage from '../assets/company photos/EnvironmentalImg.jpeg';
 import projectSuppliesImage from '../assets/company photos/pump2.jpeg';
 import waterTreatmentSuppliesImage from '../assets/company photos/products (9).jpg';
 import chemicalChem2Image from '../assets/company photos/chemicals img/chem2.jpeg';
+import chemicalFolderImage from '../assets/company photos/chemicals img/chemimg.jpeg';
+import chemicalChlorineImage from '../assets/company photos/chemicals img/chlorine.jpg';
+import chemicalKeg1Image from '../assets/company photos/chemicals img/Keg1.jpg';
+import chemicalKeg2Image from '../assets/company photos/chemicals img/Keg2.jpg';
 import chemicalMethanolImage from '../assets/company photos/chemicals img/methanol.jpeg';
 import environmentalImage from '../assets/company photos/environmental img/eniviron img.jpeg';
 import environmentalFumigationImage from '../assets/company photos/environmental img/fumigation image.jpg';
 import environmentalFieldImage from '../assets/company photos/environmental img/IMG-20260708-WA0003.jpg';
 import environmentalTeamImage from '../assets/company photos/environmental img/team (2).jpg';
 import environmentalWorkImage from '../assets/company photos/environmental img/work in progress (3).jpg';
+import charissaLogo from '../assets/company photos/our clients/Charissa logo.png';
+import deuxLogo from '../assets/company photos/our clients/deux.webp';
+import dewaylesLogo from '../assets/company photos/our clients/Dewayles-Group-of-Companies-Logo.jpg';
+import matrixLogo from '../assets/company photos/our clients/matrix logo.png';
+import nuwayLogo from '../assets/company photos/our clients/Nuway-Logo-transparent1.png';
+import ociLogo from '../assets/company photos/our clients/OCI-LOGO.png-transparent.png';
+import opacLogo from '../assets/company photos/our clients/OPAC-logo-698px.png';
+import seepcoLogo from '../assets/company photos/our clients/seepco.jpeg';
 
 const imagePath = (fileName: string) => `/company-photos/${fileName}`;
 const logoImage = imagePath('logo-removebg-preview.png');
@@ -25,7 +37,7 @@ const heroImages = [
   imagePath('hero-images/work in progress (8).jpg'),
 ];
 const waterTreatmentImage = waterTreatmentSuppliesImage;
-const chemicalImage = imagePath('chemical-sales/chlorine.jpg');
+const chemicalImage = chemicalChlorineImage;
 const aboutImage = imagePath('about.jpg');
 const equipmentImage = imagePath('IMG-20260708-WA0001.jpg');
 const marineImage = projectSuppliesImage;
@@ -41,10 +53,10 @@ const waterTreatmentGalleryImages = [
 ];
 
 const chemicalSalesImages = [
-  imagePath('chemical-sales/chlorine.jpg'),
-  imagePath('chemical-sales/Keg1.jpg'),
-  imagePath('chemical-sales/Keg2.jpg'),
-  imagePath('chemical-sales/products (8).jpg'),
+  chemicalFolderImage,
+  chemicalChlorineImage,
+  chemicalKeg1Image,
+  chemicalKeg2Image,
   chemicalMethanolImage,
   chemicalChem2Image,
 ];
@@ -60,6 +72,16 @@ const engineeringImages = [
   imagePath('engineering/IMG-20260804-WA0006.jpg'),
   imagePath('engineering/team (1).jpg'),
   imagePath('engineering/team (5).jpg'),
+];
+const clientLogos = [
+  { name: 'SEEPCO', image: seepcoLogo },
+  { name: 'Charissa', image: charissaLogo },
+  { name: 'Dewayles Group of Companies', image: dewaylesLogo },
+  { name: 'Matrix', image: matrixLogo },
+  { name: 'Nuway', image: nuwayLogo },
+  { name: 'OCI', image: ociLogo },
+  { name: 'OPAC', image: opacLogo },
+  { name: 'DEUX', image: deuxLogo },
 ];
 import {
   Phone,
@@ -91,6 +113,7 @@ export default function LandingPage() {
   const [activeWaterTreatmentGalleryImage, setActiveWaterTreatmentGalleryImage] = useState(0);
   const [activeEngineeringImage, setActiveEngineeringImage] = useState(0);
   const [activeHeroImage, setActiveHeroImage] = useState(0);
+  const [activeWhyUseUsPoint, setActiveWhyUseUsPoint] = useState(0);
 
   useEffect(() => {
     const slideshowInterval = window.setInterval(() => {
@@ -187,8 +210,9 @@ export default function LandingPage() {
   const [inquiryNeed, setInquiryNeed] = useState('Fumigation & Pest Control');
   const [inquiryLocation, setInquiryLocation] = useState('Warri, Delta State');
 
-  const defaultWhatsappNumber = '2348168027338';
-  const defaultPhoneNumber = '+234 816 802 7338';
+  const defaultWhatsappNumber = '2348051759119';
+  const defaultPhoneNumber = '+234 08051759119';
+  const secondaryPhoneNumber = '+234 07019121877';
   const defaultEmail = 'ovichemconsultltd@yahoo.com';
 
   const generateWhatsappUrl = (service?: string, space?: string, loc?: string) => {
@@ -375,6 +399,28 @@ export default function LandingPage() {
               Products
             </a>
             <a
+              href="#why-choose-us"
+              onClick={(event) => navigateToSection(event, 'why-choose-us')}
+              className={`transition-colors ${
+                isScrolled
+                  ? 'text-[#06042D]/70 hover:text-[#06042D]'
+                  : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
+              }`}
+            >
+              Why use us
+            </a>
+            <a
+              href="#clients"
+              onClick={(event) => navigateToSection(event, 'clients')}
+              className={`transition-colors ${
+                isScrolled
+                  ? 'text-[#06042D]/70 hover:text-[#06042D]'
+                  : 'text-white/90 hover:text-[#F0B84D] drop-shadow-sm'
+              }`}
+            >
+              Our clients
+            </a>
+            <a
               href="#contact"
               onClick={(event) => navigateToSection(event, 'contact')}
               className={`transition-colors ${
@@ -469,6 +515,28 @@ export default function LandingPage() {
                   }`}
                 >
                   Products
+                </a>
+                <a
+                  href="#why-choose-us"
+                  onClick={(event) => navigateToSection(event, 'why-choose-us')}
+                  className={`px-3 py-2 rounded-lg transition-colors ${
+                    isScrolled
+                      ? 'hover:bg-black/5 text-[#06042D]'
+                      : 'hover:bg-white/10 text-white'
+                  }`}
+                >
+                  Why use us
+                </a>
+                <a
+                  href="#clients"
+                  onClick={(event) => navigateToSection(event, 'clients')}
+                  className={`px-3 py-2 rounded-lg transition-colors ${
+                    isScrolled
+                      ? 'hover:bg-black/5 text-[#06042D]'
+                      : 'hover:bg-white/10 text-white'
+                  }`}
+                >
+                  Our clients
                 </a>
                 <a
                   href="#contact"
@@ -579,8 +647,8 @@ export default function LandingPage() {
       </section>
 
       {/* 3. CLIENTS SECTION */}
-      <section id="clients" className="border-b border-[#E5E5E5] bg-[#FAFAFA] py-8 sm:py-10">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-end gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+      <section id="clients" className="border-b border-[#E5E5E5] bg-[#FAFAFA] py-10 sm:py-12">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8">
           <div className="space-y-4 lg:col-span-5">
             <div className="inline-flex items-center rounded-full border border-[#E4980B]/30 bg-[#E4980B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#990909]">
               Our clients
@@ -590,20 +658,18 @@ export default function LandingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4 lg:col-span-7 lg:gap-8">
-            {[
-              'Delta Industrial Works',
-              'Meridian Energy Group',
-              'Harbour Point Labs',
-              'Northstar Facilities',
-            ].map((client, index) => (
-              <div key={client} className="flex items-center gap-3 text-[#666666]">
-                <svg viewBox="0 0 24 24" className="h-8 w-8 shrink-0 text-[#999999]" fill="none" aria-hidden="true">
-                  {index % 3 === 0 && <path d="M12 3 21 8v8l-9 5-9-5V8l9-5Z" stroke="currentColor" strokeWidth="1.5" />}
-                  {index % 3 === 1 && <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="1.5" />}
-                  {index % 3 === 2 && <path d="m4 18 5-10 3 6 2-3 6 7H4Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />}
-                </svg>
-                <span className="max-w-[10rem] text-sm font-medium leading-tight">{client}</span>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:col-span-7">
+            {clientLogos.map((client) => (
+              <div
+                key={client.name}
+                className="flex h-24 items-center justify-center border border-[#E6E1D9] bg-white px-4 py-3 shadow-[0_8px_20px_rgba(6,4,45,0.04)] transition-transform duration-300 hover:-translate-y-1 sm:h-28"
+              >
+                <Image
+                  src={client.image}
+                  alt={`${client.name} logo`}
+                  className="max-h-full w-full object-contain"
+                  sizes="(min-width: 1024px) 15vw, (min-width: 640px) 25vw, 42vw"
+                />
               </div>
             ))}
           </div>
@@ -1051,6 +1117,52 @@ export default function LandingPage() {
             </p>
           </div>
 
+          <div className="mb-12">
+            <div className="relative hidden grid-cols-7 lg:grid">
+              <div className="absolute left-[7.14%] right-[7.14%] top-[3.35rem] h-px bg-[#06042D]/15" aria-hidden="true" />
+              {whyUseUsPoints.map(([letter, meaning], index) => (
+                <button
+                  key={letter}
+                  type="button"
+                  onClick={() => setActiveWhyUseUsPoint(index)}
+                  onMouseEnter={() => setActiveWhyUseUsPoint(index)}
+                  className="group relative flex min-w-0 flex-col items-center px-3 text-center"
+                  aria-label={`${letter}: ${meaning}`}
+                >
+                  <span className={`relative z-10 font-serif-display text-6xl leading-none transition-colors duration-300 ${activeWhyUseUsPoint === index ? 'text-[#E4980B]' : 'text-[#06042D] group-hover:text-[#E4980B]'}`}>
+                    {letter}
+                  </span>
+                  <span className={`mt-7 max-w-[10rem] text-xs leading-relaxed transition-colors duration-300 ${activeWhyUseUsPoint === index ? 'text-[#06042D]' : 'text-[#6F6860] group-hover:text-[#06042D]'}`}>
+                    {meaning}
+                  </span>
+                  <span className={`mt-4 h-1 w-10 transition-colors duration-300 ${activeWhyUseUsPoint === index ? 'bg-[#E4980B]' : 'bg-transparent group-hover:bg-[#E4980B]/60'}`} aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+
+            <div className="relative lg:hidden">
+              <div className="absolute bottom-8 left-[1.1rem] top-8 w-px bg-[#06042D]/15" aria-hidden="true" />
+              <div className="space-y-1">
+                {whyUseUsPoints.map(([letter, meaning], index) => (
+                  <button
+                    key={letter}
+                    type="button"
+                    onClick={() => setActiveWhyUseUsPoint(index)}
+                    className="group relative flex w-full items-start gap-5 py-3 text-left"
+                    aria-label={`${letter}: ${meaning}`}
+                  >
+                    <span className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 bg-[#F6F1EA] font-serif-display text-xl font-semibold transition-colors duration-300 ${activeWhyUseUsPoint === index ? 'border-[#E4980B] text-[#E4980B]' : 'border-[#06042D]/20 text-[#06042D] group-hover:border-[#E4980B] group-hover:text-[#E4980B]'}`}>
+                      {letter}
+                    </span>
+                    <span className={`pt-1 text-sm leading-relaxed transition-colors duration-300 ${activeWhyUseUsPoint === index ? 'font-medium text-[#06042D]' : 'text-[#6F6860] group-hover:text-[#06042D]'}`}>
+                      {meaning}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left">
             <div className="rounded-2xl bg-white border border-[#E5E5E5]/80 p-7 sm:p-9 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
               <div className="flex items-center gap-2 mb-3">
@@ -1086,17 +1198,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-[#06042D] p-7 sm:p-9 text-white shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
-              <h3 className="text-2xl font-serif-display mb-4">Ovichem stands for</h3>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {whyUseUsPoints.map(([letter, meaning]) => (
-                  <div key={letter} className="flex items-start gap-3 text-xs leading-relaxed text-white/80">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#E4980B] font-bold text-white">{letter}</span>
-                    <span>{meaning}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
         </div>
@@ -1121,10 +1222,14 @@ export default function LandingPage() {
               </div>
 
               <div className="space-y-5 border-y border-[#D9CEC0] py-6 text-sm text-[#524B44]">
-                <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="flex items-start gap-3 transition-colors hover:text-[#990909]">
+                <div className="flex items-start gap-3">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
-                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Call or WhatsApp</strong>{defaultPhoneNumber}</span>
-                </a>
+                  <span>
+                    <strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Call or WhatsApp</strong>
+                    <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="block hover:text-[#990909]">{defaultPhoneNumber}</a>
+                    <a href={`tel:${secondaryPhoneNumber.replace(/\s+/g, '')}`} className="block hover:text-[#990909]">{secondaryPhoneNumber}</a>
+                  </span>
+                </div>
                 <a href={`mailto:${defaultEmail}`} className="flex items-start gap-3 transition-colors hover:text-[#990909]">
                   <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
                   <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Email</strong>{defaultEmail}</span>
@@ -1188,11 +1293,7 @@ export default function LandingPage() {
                     Products
                   </a>
                 </li>
-                <li>
-                  <a href="#faq" className="hover:text-[#E4980B] transition-colors">
-                    Common Questions
-                  </a>
-                </li>
+                
                 
                 <li>
                   <a href="#" className="hover:text-[#E4980B] transition-colors">
@@ -1276,6 +1377,14 @@ export default function LandingPage() {
                     className="hover:text-[#E4980B] transition-colors"
                   >
                     {defaultPhoneNumber}
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href={`tel:${secondaryPhoneNumber.replace(/\s+/g, '')}`}
+                    className="hover:text-[#E4980B] transition-colors"
+                  >
+                    {secondaryPhoneNumber}
                   </a>
                 </p>
                 <p className="text-xs text-[#8C837A] pt-1 leading-relaxed">
