@@ -25,6 +25,7 @@ import nuwayLogo from '../assets/company photos/our clients/Nuway-Logo-transpare
 import ociLogo from '../assets/company photos/our clients/OCI-LOGO.png-transparent.png';
 import opacLogo from '../assets/company photos/our clients/OPAC-logo-698px.png';
 import seepcoLogo from '../assets/company photos/our clients/seepco.jpeg';
+import micharryLogo from '../assets/company photos/our clients/micharry.jpg';
 
 const imagePath = (fileName: string) => `/company-photos/${fileName}`;
 const logoImage = imagePath('logo-removebg-preview.png');
@@ -82,9 +83,11 @@ const clientLogos = [
   { name: 'OCI', image: ociLogo },
   { name: 'OPAC', image: opacLogo },
   { name: 'DEUX', image: deuxLogo },
+  { name: 'Micharry', image: micharryLogo },
 ];
 import {
   Phone,
+  Mail,
   MessageCircle,
   ShieldCheck,
   ChevronRight,
@@ -100,6 +103,7 @@ import {
   Wrench,
   Ship,
   Menu,
+  Loader2,
 } from 'lucide-react';
 
 export default function LandingPage() {
@@ -114,6 +118,9 @@ export default function LandingPage() {
   const [activeEngineeringImage, setActiveEngineeringImage] = useState(0);
   const [activeHeroImage, setActiveHeroImage] = useState(0);
   const [activeWhyUseUsPoint, setActiveWhyUseUsPoint] = useState(0);
+  const [contactForm, setContactForm] = useState({ name: '', email: '', inquiryType: '', message: '' });
+  const [contactErrors, setContactErrors] = useState<Record<string, string>>({});
+  const [contactStatus, setContactStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     const slideshowInterval = window.setInterval(() => {
@@ -213,6 +220,7 @@ export default function LandingPage() {
   const defaultWhatsappNumber = '2348051759119';
   const defaultPhoneNumber = '+234 08051759119';
   const secondaryPhoneNumber = '+234 07019121877';
+  const tertiaryPhoneNumber = '+234 08168027338';
   const defaultEmail = 'ovichemconsultltd@yahoo.com';
 
   const generateWhatsappUrl = (service?: string, space?: string, loc?: string) => {
@@ -223,12 +231,39 @@ export default function LandingPage() {
       `Hello Ovichem Consult Limited. I would like to inquire about ${s} for my ${sp} in ${l}. Please let me know your availability and next steps.`
     );
     return `https://wa.me/${defaultWhatsappNumber}?text=${text}`;
-  };
+    };
+    const handleContactSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const errors: Record<string, string> = {};
+      if (!contactForm.name.trim()) errors.name = 'Please enter your full name.';
+      if (!contactForm.email.trim()) errors.email = 'Please enter your email address.';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) errors.email = 'Please enter a valid email address.';
+      if (!contactForm.inquiryType) errors.inquiryType = 'Please select an inquiry type.';
+      if (!contactForm.message.trim()) errors.message = 'Please tell us how we can help.';
+
+      setContactErrors(errors);
+      if (Object.keys(errors).length > 0) return;
+
+      setContactStatus('submitting');
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(contactForm),
+        });
+        if (!response.ok) throw new Error('Unable to send message');
+        setContactForm({ name: '', email: '', inquiryType: '', message: '' });
+        setContactErrors({});
+        setContactStatus('success');
+      } catch {
+        setContactStatus('error');
+      }
+    };
 
   const aboutTabs = [
     {
       id: 0,
-      title: 'Experienced & practical specialists',
+      title: 'Experienced & practical expertise',
       description:
         'Ovichem Consult Limited is a Nigerian chemical, environmental and engineering servicing company with experience in providing industrial and laboratory chemical supplies/support services, water treatment solutions, environmental monitoring and auditing, and technical engineering support services.The company has developed practical experience in water quality assessment and treatment, borehole water treatment, water treatment plant installation and maintenance, environmental inspection and monitoring, air quality and noise assessment, environmental audit reporting, sanitation, disinfection and pest-control support services. ',
     },
@@ -456,14 +491,10 @@ export default function LandingPage() {
         </div>
 
         {/* Mobile Navigation Drawer */}
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {mobileMenuOpen && (
             <motion.div
-              id="mobile-nav-menu"
-              role="navigation"
-              aria-label="Mobile Navigation"
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className={`lg:hidden border-b px-4 pt-3 pb-6 space-y-3 transition-colors ${
                 isScrolled
@@ -1170,7 +1201,7 @@ export default function LandingPage() {
                 <h3 className="text-2xl font-serif-display text-[#06042D]">Our mission</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#666666]">
-                Our mission is to provide valued, excellent and professional services to our clients in the area of Chemicals, Environmental Services and Engineering, taking coqnizance of the safety and protection of personnel, equipment, and the environment
+                Our mission is to provide valued, excellent and professional services to our clients in the area of Chemicals, Environmental Services and Engineering, taking cognizance of the safety and protection of personnel, equipment, and the environment
               </p>
             </div>
 
@@ -1209,15 +1240,13 @@ export default function LandingPage() {
         className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="space-y-6 lg:col-span-6">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start lg:gap-20">
+            <div className="space-y-8 lg:col-span-5">
               <div className="space-y-3">
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">Contact us</p>
-                <h2 className="max-w-xl text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-6xl font-serif-display">
-                  Let&apos;s discuss.....
-                </h2>
+                <h2 className="max-w-xl text-4xl leading-[1.05] tracking-tight text-[#06042D] sm:text-5xl font-serif-display">Get in touch</h2>
                 <p className="max-w-xl text-sm leading-relaxed text-[#666666] sm:text-base">
-                  Tell us what you need and our team will help you choose the right optimal solution.
+                  Tell us what you need through the form and our team will help you choose the right solution.
                 </p>
               </div>
 
@@ -1228,10 +1257,11 @@ export default function LandingPage() {
                     <strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Call or WhatsApp</strong>
                     <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="block hover:text-[#990909]">{defaultPhoneNumber}</a>
                     <a href={`tel:${secondaryPhoneNumber.replace(/\s+/g, '')}`} className="block hover:text-[#990909]">{secondaryPhoneNumber}</a>
+                     <a href={`tel:${tertiaryPhoneNumber.replace(/\s+/g, '')}`} className="block hover:text-[#990909]">{tertiaryPhoneNumber}</a>
                   </span>
                 </div>
                 <a href={`mailto:${defaultEmail}`} className="flex items-start gap-3 transition-colors hover:text-[#990909]">
-                  <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
                   <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Email</strong>{defaultEmail}</span>
                 </a>
                 <div className="flex items-start gap-3">
@@ -1240,15 +1270,53 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <a
-                href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#06042D] px-7 py-3.5 text-sm font-medium text-white shadow-md transition-colors hover:bg-[#990909]"
-              >
+              <p className="text-sm leading-relaxed text-[#786E64]">Prefer a direct conversation? Call or message us on WhatsApp and we&apos;ll respond as soon as possible.</p>
+              <a href={`tel:${defaultPhoneNumber.replace(/\s+/g, '')}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#06042D] px-7 py-3.5 text-sm font-medium text-white shadow-md transition-colors hover:bg-[#990909]">
                 <Phone className="h-4 w-4" />
                 <span>Call us now</span>
               </a>
             </div>
 
+            <form onSubmit={handleContactSubmit} noValidate className="space-y-5 border border-[#E1D8CD] bg-[#FBF9F6] p-6 sm:p-8 lg:col-span-7">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-[#06042D]">Full name <span className="text-[#990909]">*</span></label>
+                  <input id="contact-name" type="text" value={contactForm.name} onChange={(event) => setContactForm({ ...contactForm, name: event.target.value })} placeholder="Your full name" aria-invalid={Boolean(contactErrors.name)} aria-describedby={contactErrors.name ? 'contact-name-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors placeholder:text-[#9A9188] focus:border-[#06042D]" />
+                  {contactErrors.name && <p id="contact-name-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.name}</p>}
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="mb-2 block text-sm font-semibold text-[#06042D]">Email address <span className="text-[#990909]">*</span></label>
+                  <input id="contact-email" type="email" value={contactForm.email} onChange={(event) => setContactForm({ ...contactForm, email: event.target.value })} placeholder="you@example.com" aria-invalid={Boolean(contactErrors.email)} aria-describedby={contactErrors.email ? 'contact-email-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors placeholder:text-[#9A9188] focus:border-[#06042D]" />
+                  {contactErrors.email && <p id="contact-email-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.email}</p>}
+                </div>
+              </div>
+              <div>
+                <label htmlFor="contact-inquiry" className="mb-2 block text-sm font-semibold text-[#06042D]">What can we help with? <span className="text-[#990909]">*</span></label>
+                <select id="contact-inquiry" value={contactForm.inquiryType} onChange={(event) => setContactForm({ ...contactForm, inquiryType: event.target.value })} aria-invalid={Boolean(contactErrors.inquiryType)} aria-describedby={contactErrors.inquiryType ? 'contact-inquiry-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors focus:border-[#06042D]">
+                  <option value="">Select an inquiry type</option>
+                  <option>Fumigation & Pest Control</option>
+                  <option>Water Treatment Solutions</option>
+                  <option>Chemical & Laboratory Supplies</option>
+                  <option>Engineering Support</option>
+                  <option>Environmental Services</option>
+                  <option>General enquiry</option>
+                </select>
+                {contactErrors.inquiryType && <p id="contact-inquiry-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.inquiryType}</p>}
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-[#06042D]">Message <span className="text-[#990909]">*</span></label>
+                <textarea id="contact-message" rows={5} value={contactForm.message} onChange={(event) => setContactForm({ ...contactForm, message: event.target.value })} placeholder="Tell us a little about what you need" aria-invalid={Boolean(contactErrors.message)} aria-describedby={contactErrors.message ? 'contact-message-error' : undefined} className="w-full resize-y border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors placeholder:text-[#9A9188] focus:border-[#06042D]" />
+                {contactErrors.message && <p id="contact-message-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.message}</p>}
+              </div>
+              <div className="flex flex-col items-start gap-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
+                <button type="submit" disabled={contactStatus === 'submitting'} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#06042D] px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[#990909] disabled:cursor-not-allowed disabled:opacity-70">
+                  {contactStatus === 'submitting' && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {contactStatus === 'submitting' ? 'Sending...' : 'Send message'}
+                </button>
+                {contactStatus === 'success' && <p role="status" className="text-sm text-[#3D6B4B]">Thanks, your message has been sent.</p>}
+                {contactStatus === 'error' && <p role="alert" className="text-sm text-[#990909]">We couldn&apos;t send your message. Please try again or call us directly.</p>}
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -1316,7 +1384,7 @@ export default function LandingPage() {
               <ul className="space-y-2.5 text-xs sm:text-sm text-[#666666]">
                 <li>
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/ovichem1"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[#E4980B] transition-colors"
@@ -1326,7 +1394,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a
-                    href="https://twitter.com"
+                    href="https://www.twitter.com/ovichem1"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[#E4980B] transition-colors"
@@ -1336,7 +1404,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/ovichem"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[#E4980B] transition-colors"
@@ -1346,12 +1414,12 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a
-                    href={generateWhatsappUrl()}
+                    href="https://www.youtube.com/@ovichem1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-[#E4980B] transition-colors text-[#E4980B] font-medium"
+                    className="hover:text-[#E4980B] transition-colors"
                   >
-                    WhatsApp Support
+                    YouTube
                   </a>
                 </li>
               </ul>
@@ -1387,8 +1455,16 @@ export default function LandingPage() {
                     {secondaryPhoneNumber}
                   </a>
                 </p>
+                <p>
+                  <a
+                    href={`tel:${tertiaryPhoneNumber.replace(/\s+/g, '')}`}
+                    className="hover:text-[#E4980B] transition-colors"
+                  >
+                    {tertiaryPhoneNumber}
+                  </a>
+                </p>
                 <p className="text-xs text-[#8C837A] pt-1 leading-relaxed">
-                  Suite 1-03 Alfa Plaza, Opposite Coca Cola Depot <br />
+                  Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot <br />
                   Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.
                 </p>
               </div>
@@ -1406,10 +1482,21 @@ export default function LandingPage() {
 
         </div>
       </footer>
-
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
