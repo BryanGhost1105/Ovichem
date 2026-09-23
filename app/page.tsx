@@ -17,9 +17,11 @@ import environmentalFumigationImage from '../assets/company photos/environmental
 import environmentalFieldImage from '../assets/company photos/environmental img/IMG-20260708-WA0003.jpg';
 import environmentalTeamImage from '../assets/company photos/environmental img/team (2).jpg';
 import environmentalWorkImage from '../assets/company photos/environmental img/work in progress (3).jpg';
+import teamHeroImage from '../assets/company photos/hero images/team img.jpg';
 import charissaLogo from '../assets/company photos/our clients/Charissa logo.png';
 import deuxLogo from '../assets/company photos/our clients/deux.webp';
 import dewaylesLogo from '../assets/company photos/our clients/Dewayles-Group-of-Companies-Logo.jpg';
+import inqentialLogo from '../assets/company photos/our clients/INQENTIAL.svg';
 import matrixLogo from '../assets/company photos/our clients/matrix logo.png';
 import nuwayLogo from '../assets/company photos/our clients/Nuway-Logo-transparent1.png';
 import ociLogo from '../assets/company photos/our clients/OCI-LOGO.png-transparent.png';
@@ -36,6 +38,7 @@ const heroImages = [
   imagePath('hero-images/team (1).jpg'),
   imagePath('hero-images/team (2).jpg'),
   imagePath('hero-images/work in progress (8).jpg'),
+  teamHeroImage.src,
 ];
 const waterTreatmentImage = waterTreatmentSuppliesImage;
 const chemicalImage = chemicalChlorineImage;
@@ -84,6 +87,7 @@ const clientLogos = [
   { name: 'OPAC', image: opacLogo },
   { name: 'DEUX', image: deuxLogo },
   { name: 'Micharry', image: micharryLogo },
+  { name: 'Inqential Energies', image: inqentialLogo },
 ];
 import {
   Phone,
@@ -217,11 +221,13 @@ export default function LandingPage() {
   const [inquiryNeed, setInquiryNeed] = useState('Fumigation & Pest Control');
   const [inquiryLocation, setInquiryLocation] = useState('Warri, Delta State');
 
-  const defaultWhatsappNumber = '2348051759119';
-  const defaultPhoneNumber = '+234 08051759119';
-  const secondaryPhoneNumber = '+234 07019121877';
-  const tertiaryPhoneNumber = '+234 08168027338';
+  const defaultWhatsappNumber = '2347019121877';
+  const defaultPhoneNumber = '+234 07019121877';
+  const secondaryPhoneNumber = '+234 08168027338';
+  const tertiaryPhoneNumber = '+234 08051759119';
   const defaultEmail = 'ovichemconsultltd@yahoo.com';
+  const officeAddress = 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.';
+  const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(officeAddress)}&travelmode=driving`;
 
   const generateWhatsappUrl = (service?: string, space?: string, loc?: string) => {
     const s = service || inquiryNeed;
@@ -495,8 +501,10 @@ export default function LandingPage() {
           {mobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className={`lg:hidden border-b px-4 pt-3 pb-6 space-y-3 transition-colors ${
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className={`lg:hidden border-b px-4 pt-3 pb-6 space-y-3 transition-colors overflow-hidden ${
                 isScrolled
                   ? 'bg-white/98 backdrop-blur-xl border-[#E5E5E5] text-[#06042D]'
                   : 'bg-[#06042D]/95 backdrop-blur-xl border-white/15 text-white'
@@ -1266,7 +1274,15 @@ export default function LandingPage() {
                 </a>
                 <div className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
-                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Visit us at</strong>Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.</span>
+                  <span>
+                    <strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Visit us at</strong>
+                    <span className="block">{officeAddress}</span>
+                    <a href={mapDirectionsUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block font-semibold text-[#990909] hover:text-[#E4980B]">Get map directions</a>
+                  </span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
+                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Working hours</strong>Monday to Friday: 8:30am - 5:30pm<br />Saturday and Sunday: Closed</span>
                 </div>
               </div>
 
@@ -1294,11 +1310,11 @@ export default function LandingPage() {
                 <label htmlFor="contact-inquiry" className="mb-2 block text-sm font-semibold text-[#06042D]">What can we help with? <span className="text-[#990909]">*</span></label>
                 <select id="contact-inquiry" value={contactForm.inquiryType} onChange={(event) => setContactForm({ ...contactForm, inquiryType: event.target.value })} aria-invalid={Boolean(contactErrors.inquiryType)} aria-describedby={contactErrors.inquiryType ? 'contact-inquiry-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors focus:border-[#06042D]">
                   <option value="">Select an inquiry type</option>
-                  <option>Fumigation & Pest Control</option>
-                  <option>Water Treatment Solutions</option>
-                  <option>Chemical & Laboratory Supplies</option>
-                  <option>Engineering Support</option>
-                  <option>Environmental Services</option>
+                  <option>Chemical and laboratory supplies</option>
+                  <option>Water treatment solutions</option>
+                  <option>Environmental services</option>
+                  <option>Fumigation and pest control</option>
+                  <option>Engineering and technical support</option>
                   <option>General enquiry</option>
                 </select>
                 {contactErrors.inquiryType && <p id="contact-inquiry-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.inquiryType}</p>}
