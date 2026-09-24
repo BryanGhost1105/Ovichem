@@ -6,6 +6,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const name = typeof body.name === 'string' ? body.name.trim() : '';
     const email = typeof body.email === 'string' ? body.email.trim() : '';
+    const companyName = typeof body.companyName === 'string' ? body.companyName.trim() : '';
     const inquiryType = typeof body.inquiryType === 'string' ? body.inquiryType.trim() : '';
     const message = typeof body.message === 'string' ? body.message.trim() : '';
 
@@ -30,7 +31,7 @@ export async function POST(request: Request) {
       to: recipient,
       replyTo: email,
       subject: `[Website enquiry] ${inquiryType} - ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nInquiry type: ${inquiryType}\n\nMessage:\n${message}`,
+      text: `Name: ${name}\nEmail: ${email}\nCompany: ${companyName || 'N/A'}\nInquiry type: ${inquiryType}\n\nMessage:\n${message}`,
     });
 
     return NextResponse.json({ ok: true });
