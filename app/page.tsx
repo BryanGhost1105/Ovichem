@@ -778,10 +778,10 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
-              Our mission &amp; vision
+              What drives us
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight">
-              What drives us
+              Our mission &amp; vision
             </h2>
             <p className="text-sm sm:text-base text-[#666666] leading-relaxed max-w-2xl mx-auto">
               Our purpose, direction and the principles that guide every project we undertake.
@@ -1099,18 +1099,25 @@ export default function LandingPage() {
       {/* 6. PRODUCTS SECTION */}
       <section id="products" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F6F1EA] py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 sm:mb-12">
+            <div className="space-y-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
+                Products
+              </div>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight leading-[1.08]">
+                Products
+              </h2>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-stretch">
             <div className="flex flex-col justify-between rounded-2xl border border-[#E5E5E5] bg-[#06042D] p-7 text-white shadow-sm sm:p-9 lg:col-span-5">
               <div className="space-y-5">
-                <div className="inline-flex items-center rounded-full border border-[#F0B84D]/40 bg-[#F0B84D]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#F0B84D]">
-                  Products we supply
-                </div>
-                <h2 className="max-w-lg text-3xl leading-[1.08] tracking-tight sm:text-5xl">
+                <h3 className="max-w-lg font-serif-display text-2xl leading-[1.15] tracking-tight text-white sm:text-4xl">
                   Chemicals, equipment and supplies for the job
-                </h2>
+                </h3>
                 <p className="max-w-md text-sm leading-relaxed text-white/70 sm:text-base">
-                    We supply Industrial and laboratory chemicals/reagents, water-treatment equipment and general project supplies for various applications across multiple industries. 
-
+                  We supply Industrial and laboratory chemicals/reagents, water-treatment equipment and general project supplies for various applications across multiple industries.
                 </p>
               </div>
               <div className="mt-12 flex items-center gap-3 border-t border-white/15 pt-5 text-xs text-white/60">
@@ -1234,16 +1241,25 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 9. MINI PROJECT GALLERY */}
-      <section id="project-gallery" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F8F7FC] py-16 sm:py-20">
+      {/* 9. MINI PROJECT GALLERY / OPERATIONS IN FOCUS */}
+      <section id="project-gallery" className="scroll-mt-24 border-b border-[#E5E5E5]/70 bg-[#F8F7FC] py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#990909]">From our work</p>
-              <h2 className="mt-2 text-3xl text-[#06042D] sm:text-4xl">A look at what we do</h2>
+          <div className="mb-10 sm:mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div className="space-y-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#E4980B]/10 border border-[#E4980B]/30 text-[#990909] text-xs font-semibold uppercase tracking-wider">
+                Operations in focus
+              </div>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif-display text-[#06042D] tracking-tight leading-[1.08]">
+                Our work in action
+              </h2>
             </div>
-            <a href="#contact" className="inline-flex items-center gap-1 text-sm font-semibold text-[#990909] hover:text-[#E4980B]">
-              Talk to the team <ArrowRight className="h-4 w-4" />
+            <a
+              href="#contact"
+              onClick={(event) => navigateToSection(event, 'contact')}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#990909] hover:text-[#E4980B] transition-colors pb-1"
+            >
+              <span>Talk to our team</span>
+              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
