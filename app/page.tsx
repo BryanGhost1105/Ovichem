@@ -223,7 +223,7 @@ export default function LandingPage() {
   const [inquiryNeed, setInquiryNeed] = useState('Fumigation & Pest Control');
   const [inquiryLocation, setInquiryLocation] = useState('Warri, Delta State');
 
-  const defaultWhatsappNumber = '2347019121877';
+  const defaultWhatsappNumber = '23408168027338';
   const defaultPhoneNumber = '+234 07019121877';
   const secondaryPhoneNumber = '+234 08168027338';
   const tertiaryPhoneNumber = '+234 08051759119';
