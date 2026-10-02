@@ -339,13 +339,36 @@ export default function LandingPage() {
             '@type': 'LocalBusiness',
             name: 'Ovichem Consult Limited',
             description:
-              'Fumigation services, water treatment, and fumigative chemical supply for homes and businesses.',
-            areaServed: ['Warri', 'Delta State', 'Nigeria'],
+              'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services based in Warri, Delta State, Nigeria.',
+            telephone: '+2348168027338',
+            email: 'ovichemconsultltd@yahoo.com',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen',
+              addressLocality: 'Effurun, Warri',
+              addressRegion: 'Delta State',
+              addressCountry: 'NG',
+            },
+            areaServed: [
+              { '@type': 'City', name: 'Warri' },
+              { '@type': 'AdministrativeArea', name: 'Delta State' },
+              { '@type': 'Country', name: 'Nigeria' },
+            ],
             serviceType: [
-              'Fumigation services',
-              'Pest control',
+              'Industrial and laboratory chemical supply',
+              'Environmental audit and monitoring',
+              'Air quality and noise monitoring',
+              'Fumigation and pest control',
               'Water treatment',
-              'Fumigative chemical supply',
+              'Water treatment plant installation and maintenance',
+              'Engineering consultancy and technical support',
+            ],
+            sameAs: [
+              'https://www.linkedin.com/in/ovichem',
+              'https://www.instagram.com/ovichem1',
+              'https://www.twitter.com/ovichem1',
+              'https://www.facebook.com/ovichem',
+              'https://www.youtube.com/@ovichem1',
             ],
           }),
         }}
@@ -1441,18 +1464,6 @@ export default function LandingPage() {
                     Products
                   </a>
                 </li>
-                
-                
-                <li>
-                  <a href="#" className="hover:text-[#E4980B] transition-colors">
-                    Privacy policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-[#E4980B] transition-colors">
-                    Terms of use
-                  </a>
-                </li>
               </ul>
             </div>
 
@@ -1462,6 +1473,16 @@ export default function LandingPage() {
                 Social media
               </h4>
               <ul className="space-y-2.5 text-xs sm:text-sm text-[#666666]">
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/ovichem"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#E4980B] transition-colors"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
                 <li>
                   <a
                     href="https://www.instagram.com/ovichem1"
