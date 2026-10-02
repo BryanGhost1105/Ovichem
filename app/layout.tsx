@@ -19,7 +19,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: 'Ovichem Consult Ltd | Chemical, Environmental & Engineering Services in Warri',
+  title: 'Ovichem Consult | Chemical, Environmental & Engineering',
   description:
     'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services in Warri, Delta State, Nigeria.',
   alternates: siteUrl ? { canonical: '/' } : undefined,

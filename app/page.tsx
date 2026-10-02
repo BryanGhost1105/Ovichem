@@ -81,7 +81,7 @@ const engineeringImages = [
 ];
 const clientLogos = [
   { name: 'SEEPCO', image: seepcoLogo },
-  { name: 'Charissa', image: charissaLogo },
+  { name: 'Inqential Energies', image: inqentialLogo },
   { name: 'Dewayles Group of Companies', image: dewaylesLogo },
   { name: 'Matrix', image: matrixLogo },
   { name: 'Nuway', image: nuwayLogo },
@@ -89,7 +89,7 @@ const clientLogos = [
   { name: 'OPAC', image: opacLogo },
   { name: 'DEUX', image: deuxLogo },
   { name: 'Micharry', image: micharryLogo },
-  { name: 'Inqential Energies', image: inqentialLogo },
+  { name: 'Charissa', image: charissaLogo },
 ];
 import {
   Phone,
@@ -1462,6 +1462,11 @@ export default function LandingPage() {
                 <li>
                   <a href="#products" className="hover:text-[#E4980B] transition-colors">
                     Products
+                  </a>
+                </li>
+                <li>
+                  <a href="/privacy-policy" className="hover:text-[#E4980B] transition-colors">
+                    Privacy policy
                   </a>
                 </li>
               </ul>
