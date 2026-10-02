@@ -218,12 +218,7 @@ export default function LandingPage() {
     };
   }, []);
 
-  // WhatsApp Inquiry Generator State
-  const [inquirySpace, setInquirySpace] = useState('Domestic Home / Residence');
-  const [inquiryNeed, setInquiryNeed] = useState('Fumigation & Pest Control');
-  const [inquiryLocation, setInquiryLocation] = useState('Warri, Delta State');
-
-  const defaultWhatsappNumber = '23408168027338';
+  const defaultWhatsappNumber = '2348168027338';
   const defaultPhoneNumber = '+234 07019121877';
   const secondaryPhoneNumber = '+234 08168027338';
   const tertiaryPhoneNumber = '+234 08051759119';
@@ -231,16 +226,13 @@ export default function LandingPage() {
   const officeAddress = 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.';
   const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(officeAddress)}&travelmode=driving`;
 
-  const generateWhatsappUrl = (service?: string, space?: string, loc?: string) => {
-    const s = service || inquiryNeed;
-    const sp = space || inquirySpace;
-    const l = loc || inquiryLocation;
+  const generateWhatsappUrl = (service: string) => {
     const text = encodeURIComponent(
-      `Hello Ovichem Consult Limited. I would like to inquire about ${s} for my ${sp} in ${l}. Please let me know your availability and next steps.`
+      `Hello Ovichem Consult Limited, I found your website and would like to inquire about ${service}. Could you please advise on the suitable solution, availability, and pricing? I can share my location, requirements, and preferred timeline. Please let me know what details you need to prepare a recommendation or quotation.`
     );
     return `https://wa.me/${defaultWhatsappNumber}?text=${text}`;
-    };
-    const handleContactSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  };
+  const handleContactSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const errors: Record<string, string> = {};
       if (!contactForm.name.trim()) errors.name = 'Please enter your full name.';
@@ -757,7 +749,7 @@ export default function LandingPage() {
 
               <div className="pt-4">
                 <a
-                  href={generateWhatsappUrl('General Property Consultation')}
+                  href={generateWhatsappUrl('your chemical, environmental, or engineering services')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#E4980B] hover:bg-[#990909] text-white text-sm font-normal px-7 py-3.5 rounded-full shadow-md shadow-black/15 transition-all"
@@ -914,7 +906,7 @@ export default function LandingPage() {
 
                 <div className="pt-4 border-t border-[#E5E5E5]/50">
                   <a
-                    href={generateWhatsappUrl('Fumigation & Pest Control')}
+                    href={generateWhatsappUrl('environmental services, such as environmental audits, air quality monitoring, noise measurement, or decontamination')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-between w-full text-xs font-semibold text-[#E4980B] group-hover:text-[#990909]"
@@ -992,7 +984,7 @@ export default function LandingPage() {
 
                 <div className="pt-4 border-t border-[#E5E5E5]/50">
                   <a
-                    href={generateWhatsappUrl('Drinking Water Treatment')}
+                    href={generateWhatsappUrl('engineering services, including water treatment, plant installation or maintenance, commissioning, rehabilitation, or technical consultancy')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-between w-full text-xs font-semibold text-[#E4980B] group-hover:text-[#990909]"
