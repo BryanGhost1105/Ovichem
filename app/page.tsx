@@ -647,9 +647,10 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
               id="hero-main-title"
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-serif-display text-[#FFFFFF] leading-[1.03] tracking-tight drop-shadow-sm font-normal"
+              className="font-serif-display text-5xl font-bold uppercase leading-[0.92] tracking-normal text-white drop-shadow-sm sm:text-6xl md:text-7xl lg:text-[5.75rem]"
             >
-              Welcome to Ovichem Consult Limited
+              <span className="mb-3 block text-base font-bold leading-none sm:mb-4 sm:text-lg">Welcome to</span>
+              <span className="block">Ovichem Consult Limited</span>
             </motion.h1>
 
             {/* Strategic Subtitle */}
@@ -658,9 +659,9 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               id="hero-subtitle"
-              className="text-sm sm:text-base md:text-lg text-white/90 font-normal leading-relaxed max-w-2xl pt-1 drop-shadow-sm"
+              className="max-w-2xl pt-3 text-sm font-semibold leading-relaxed text-white/90 drop-shadow-sm sm:text-base md:text-lg"
             >
-              Chemicals, Enivronmental Services and Engineering
+              Chemicals, Environmental Services and Engineering
             </motion.p>
 
 
