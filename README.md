@@ -1,14 +1,14 @@
 
 ### Contact form email setup
 
-The contact form sends messages through Gmail SMTP on the server to `ovichemconsultltd@yahoo.com`. Add these environment variables before running the app:
+The contact form sends messages through Yahoo SMTP to `ovichemconsultltd@yahoo.com`. Create a Yahoo App Password for the business mailbox, then add these environment variables in the Vercel project under **Settings > Environment Variables**:
 
-```bash
-GMAIL_USER=your-gmail-address
-GMAIL_APP_PASSWORD=your-gmail-app-password
+```text
+YAHOO_USER=ovichemconsultltd@yahoo.com
+YAHOO_APP_PASSWORD=your-yahoo-app-password
 ```
 
-Use a Gmail App Password for `GMAIL_APP_PASSWORD`; never expose these values in client-side code. The Gmail account is used to send the message, and form submissions are delivered to the company's Yahoo address.
+Set the variables for Production, save them, and redeploy the project. For local development, put the same variables in `.env.local` and restart the dev server. Never commit or expose the App Password in client-side code.
 # Ovichem Consult Ltd
 
 Official website and service portal for **Ovichem Consult Ltd** — Practical space and chemical treatment specialists based in Warri, Delta State, Nigeria.

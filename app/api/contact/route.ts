@@ -14,20 +14,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please provide valid contact details and a message.' }, { status: 400 });
     }
 
-    const gmailUser = process.env.GMAIL_USER;
-    const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+    const yahooUser = process.env.YAHOO_USER;
+    const yahooAppPassword = process.env.YAHOO_APP_PASSWORD;
     const recipient = 'ovichemconsultltd@yahoo.com';
-    if (!gmailUser || !gmailAppPassword) {
+    if (!yahooUser || !yahooAppPassword) {
       return NextResponse.json({ error: 'Email service is not configured.' }, { status: 503 });
     }
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: gmailUser, pass: gmailAppPassword },
+      host: 'smtp.mail.yahoo.com',
+      port: 465,
+      secure: true,
+      auth: { user: yahooUser, pass: yahooAppPassword },
     });
 
     await transporter.sendMail({
-      from: `Ovichem website <${gmailUser}>`,
+      from: `Ovichem website <${yahooUser}>`,
       to: recipient,
       replyTo: email,
       subject: `[Website enquiry] ${inquiryType} - ${name}`,
