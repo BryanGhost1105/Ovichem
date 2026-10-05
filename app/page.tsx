@@ -124,7 +124,7 @@ export default function LandingPage() {
   const [activeEngineeringImage, setActiveEngineeringImage] = useState(0);
   const [activeHeroImage, setActiveHeroImage] = useState(0);
   const [activeWhyUseUsPoint, setActiveWhyUseUsPoint] = useState(0);
-  const [contactForm, setContactForm] = useState({ userType: 'individual', name: '', email: '', companyName: '', inquiryType: '', message: '' });
+  const [contactForm, setContactForm] = useState({ name: '', email: '', companyName: '', inquiryType: '', message: '' });
   const [contactErrors, setContactErrors] = useState<Record<string, string>>({});
   const [contactStatus, setContactStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
@@ -238,7 +238,7 @@ export default function LandingPage() {
       if (!contactForm.name.trim()) errors.name = 'Please enter your full name.';
       if (!contactForm.email.trim()) errors.email = 'Please enter your email address.';
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) errors.email = 'Please enter a valid email address.';
-      if (contactForm.userType === 'company' && !contactForm.companyName.trim()) errors.companyName = 'Please enter your company name.';
+      if (!contactForm.companyName.trim()) errors.companyName = 'Please enter your company name.';
       if (!contactForm.inquiryType) errors.inquiryType = 'Please select an inquiry type.';
       if (!contactForm.message.trim()) errors.message = 'Please tell us how we can help.';
 
@@ -247,17 +247,13 @@ export default function LandingPage() {
 
       setContactStatus('submitting');
       try {
-        const payload = {
-          ...contactForm,
-          companyName: contactForm.userType === 'company' ? contactForm.companyName : ''
-        };
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(contactForm),
         });
         if (!response.ok) throw new Error('Unable to send message');
-        setContactForm({ userType: 'individual', name: '', email: '', companyName: '', inquiryType: '', message: '' });
+        setContactForm({ name: '', email: '', companyName: '', inquiryType: '', message: '' });
         setContactErrors({});
         setContactStatus('success');
       } catch {
@@ -1360,39 +1356,10 @@ export default function LandingPage() {
                 </div>
               </div>
               <div>
-                <label className="mb-2 block text-sm font-semibold text-[#06042D]">I am contacting as: <span className="text-[#990909]">*</span></label>
-                <div className="flex gap-4 mb-4">
-                  <label className="flex items-center gap-2 text-sm text-[#06042D] cursor-pointer">
-                    <input 
-                      type="radio" 
-                      name="userType" 
-                      value="individual" 
-                      checked={contactForm.userType === 'individual'} 
-                      onChange={() => setContactForm({ ...contactForm, userType: 'individual' })}
-                      className="w-4 h-4 accent-[#06042D]"
-                    />
-                    An Individual
-                  </label>
-                  <label className="flex items-center gap-2 text-sm text-[#06042D] cursor-pointer">
-                    <input 
-                      type="radio" 
-                      name="userType" 
-                      value="company" 
-                      checked={contactForm.userType === 'company'} 
-                      onChange={() => setContactForm({ ...contactForm, userType: 'company' })}
-                      className="w-4 h-4 accent-[#06042D]"
-                    />
-                    A Company
-                  </label>
-                </div>
+                <label htmlFor="contact-company" className="mb-2 block text-sm font-semibold text-[#06042D]">Company name <span className="text-[#990909]">*</span></label>
+                <input id="contact-company" type="text" value={contactForm.companyName} onChange={(event) => setContactForm({ ...contactForm, companyName: event.target.value })} placeholder="Your company name" aria-invalid={Boolean(contactErrors.companyName)} aria-describedby={contactErrors.companyName ? 'contact-company-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors placeholder:text-[#9A9188] focus:border-[#06042D]" />
+                {contactErrors.companyName && <p id="contact-company-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.companyName}</p>}
               </div>
-              {contactForm.userType === 'company' && (
-                <div>
-                  <label htmlFor="contact-company" className="mb-2 block text-sm font-semibold text-[#06042D]">Company Name <span className="text-[#990909]">*</span></label>
-                  <input id="contact-company" type="text" value={contactForm.companyName} onChange={(event) => setContactForm({ ...contactForm, companyName: event.target.value })} placeholder="Your company name" aria-invalid={Boolean(contactErrors.companyName)} aria-describedby={contactErrors.companyName ? 'contact-company-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors placeholder:text-[#9A9188] focus:border-[#06042D]" />
-                  {contactErrors.companyName && <p id="contact-company-error" className="mt-1.5 text-xs text-[#990909]">{contactErrors.companyName}</p>}
-                </div>
-              )}
               <div>
                 <label htmlFor="contact-inquiry" className="mb-2 block text-sm font-semibold text-[#06042D]">What can we help with? <span className="text-[#990909]">*</span></label>
                 <select id="contact-inquiry" value={contactForm.inquiryType} onChange={(event) => setContactForm({ ...contactForm, inquiryType: event.target.value })} aria-invalid={Boolean(contactErrors.inquiryType)} aria-describedby={contactErrors.inquiryType ? 'contact-inquiry-error' : undefined} className="w-full border border-[#D9CEC0] bg-white px-4 py-3 text-sm text-[#06042D] outline-none transition-colors focus:border-[#06042D]">

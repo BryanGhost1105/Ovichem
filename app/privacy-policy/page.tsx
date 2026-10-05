@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-2">
             <h2 className="text-lg font-semibold text-[#06042D]">Information you provide</h2>
             <p>
-              When you use the contact form, we receive your name, email address, enquiry type, message, and, if you contact us as a company, your company name. Please do not include sensitive personal information that is not needed for your enquiry.
+              When you use the contact form, we receive your name, email address, company name, enquiry type, and message. Please do not include sensitive personal information that is not needed for your enquiry.
             </p>
           </section>
 

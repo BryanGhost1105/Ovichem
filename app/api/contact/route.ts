@@ -10,14 +10,14 @@ export async function POST(request: Request) {
     const inquiryType = typeof body.inquiryType === 'string' ? body.inquiryType.trim() : '';
     const message = typeof body.message === 'string' ? body.message.trim() : '';
 
-    if (!name || !email || !inquiryType || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!name || !email || !companyName || !inquiryType || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: 'Please provide valid contact details and a message.' }, { status: 400 });
     }
 
     const gmailUser = process.env.GMAIL_USER;
     const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
-    const recipient = process.env.CONTACT_EMAIL || gmailUser;
-    if (!gmailUser || !gmailAppPassword || !recipient) {
+    const recipient = 'ovichemconsultltd@yahoo.com';
+    if (!gmailUser || !gmailAppPassword) {
       return NextResponse.json({ error: 'Email service is not configured.' }, { status: 503 });
     }
 
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
       to: recipient,
       replyTo: email,
       subject: `[Website enquiry] ${inquiryType} - ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nCompany: ${companyName || 'N/A'}\nInquiry type: ${inquiryType}\n\nMessage:\n${message}`,
+      text: `Name: ${name}\nEmail: ${email}\nCompany: ${companyName}\nInquiry type: ${inquiryType}\n\nMessage:\n${message}`,
     });
 
     return NextResponse.json({ ok: true });
