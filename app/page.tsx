@@ -655,7 +655,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-primary-900/15 backdrop-blur-[0.5px]" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-28 sm:py-24 lg:py-28 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-22 sm:py-24 lg:py-28 w-full">
           <div className="max-w-3xl lg:max-w-4xl space-y-5 sm:space-y-6">
             
           
