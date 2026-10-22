@@ -646,7 +646,7 @@ export default function LandingPage() {
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-cover sm:bg-contain bg-center bg-no-repeat"
+                className="absolute inset-y-0 inset-x-[10%] sm:inset-0 rounded-2xl sm:rounded-none bg-cover sm:bg-contain bg-center bg-no-repeat overflow-hidden"
                 style={{ backgroundImage: `url('${heroImages[activeHeroImage]}')` }}
               />
             </motion.div>
@@ -655,7 +655,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-primary-900/15 backdrop-blur-[0.5px]" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10 sm:py-24 lg:py-28 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-28 sm:py-24 lg:py-28 w-full">
           <div className="max-w-3xl lg:max-w-4xl space-y-5 sm:space-y-6">
             
           
@@ -668,7 +668,7 @@ export default function LandingPage() {
               id="hero-main-title"
               className="font-serif-display text-[2.1rem] font-bold uppercase leading-[0.92] tracking-normal text-white drop-shadow-sm sm:text-6xl md:text-7xl lg:text-[5.75rem]"
             >
-              <span className="mb-3 block text-base font-bold leading-none sm:mb-4 sm:text-lg">Welcome to</span>
+              <span className="mb-3 block text-[1.2rem] font-bold leading-none sm:mb-4 sm:text-lg">Welcome to</span>
               <span className="block">Ovichem Consult Limited</span>
             </motion.h1>
 
