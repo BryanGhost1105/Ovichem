@@ -623,7 +623,7 @@ export default function LandingPage() {
       {/* 2. HERO SECTION */}
       <section
         id="hero-section"
-        className="relative min-h-[88dvh] lg:min-h-[92dvh] flex flex-col justify-center overflow-hidden text-white pt-24 sm:pt-28"
+        className="relative min-h-[88dvh] lg:min-h-[92dvh] flex flex-col justify-end sm:justify-center overflow-hidden text-white pt-24 sm:pt-28"
       >
         <div
           id="hero-bg-container"
@@ -646,7 +646,7 @@ export default function LandingPage() {
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+                className="absolute inset-0 bg-cover sm:bg-contain bg-center bg-no-repeat"
                 style={{ backgroundImage: `url('${heroImages[activeHeroImage]}')` }}
               />
             </motion.div>
@@ -655,7 +655,7 @@ export default function LandingPage() {
           <div className="absolute inset-0 bg-primary-900/15 backdrop-blur-[0.5px]" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10 sm:py-24 lg:py-28 w-full">
           <div className="max-w-3xl lg:max-w-4xl space-y-5 sm:space-y-6">
             
           
@@ -666,7 +666,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
               id="hero-main-title"
-              className="font-serif-display text-5xl font-bold uppercase leading-[0.92] tracking-normal text-white drop-shadow-sm sm:text-6xl md:text-7xl lg:text-[5.75rem]"
+              className="font-serif-display text-[2.1rem] font-bold uppercase leading-[0.92] tracking-normal text-white drop-shadow-sm sm:text-6xl md:text-7xl lg:text-[5.75rem]"
             >
               <span className="mb-3 block text-base font-bold leading-none sm:mb-4 sm:text-lg">Welcome to</span>
               <span className="block">Ovichem Consult Limited</span>
