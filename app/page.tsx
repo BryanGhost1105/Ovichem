@@ -18,7 +18,11 @@ import environmentalFumigationImage from '../assets/company photos/environmental
 import environmentalFieldImage from '../assets/company photos/environmental img/IMG-20260708-WA0003.jpg';
 import environmentalTeamImage from '../assets/company photos/environmental img/team (2).jpg';
 import environmentalWorkImage from '../assets/company photos/environmental img/work in progress (3).jpg';
+import heroChemicalImage from '../assets/company photos/hero images/chemimg.jpeg';
+import heroEnvironmentalImage from '../assets/company photos/hero images/eniviron img.jpeg';
 import teamHeroImage from '../assets/company photos/hero images/team img.jpg';
+import arcoLogo from '../assets/company photos/our clients/ARCO_Logo_Colour_RGB.webp';
+import airLiquideLogo from '../assets/company photos/our clients/air-liquide_0.svg';
 import charissaLogo from '../assets/company photos/our clients/Charissa logo.png';
 import deuxLogo from '../assets/company photos/our clients/deux.webp';
 import dewaylesLogo from '../assets/company photos/our clients/Dewayles-Group-of-Companies-Logo.jpg';
@@ -35,7 +39,8 @@ const logoImage = imagePath('logo-removebg-preview.png');
 const heroImages = [
   imagePath('hero-images/engineering image.jpg'),
   imagePath('hero-images/Keg1.jpg'),
-  imagePath('hero-images/Keg2.jpg'),
+  heroChemicalImage.src,
+  heroEnvironmentalImage.src,
   imagePath('hero-images/team (1).jpg'),
   imagePath('hero-images/team (2).jpg'),
   imagePath('hero-images/work in progress (8).jpg'),
@@ -80,6 +85,8 @@ const engineeringImages = [
   imagePath('engineering/team (5).jpg'),
 ];
 const clientLogos = [
+  { name: 'ARCO', image: arcoLogo },
+  { name: 'Air Liquide', image: airLiquideLogo },
   { name: 'SEEPCO', image: seepcoLogo },
   { name: 'Inqential Energies', image: inqentialLogo },
   { name: 'Dewayles Group of Companies', image: dewaylesLogo },
@@ -666,10 +673,10 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
               id="hero-main-title"
-              className="font-serif-display text-[2.1rem] font-bold uppercase leading-[0.92] tracking-normal text-white drop-shadow-sm sm:text-6xl md:text-7xl lg:text-[5.75rem]"
+              className="font-serif-display font-bold uppercase leading-[0.92] tracking-normal text-white drop-shadow-sm"
             >
-              <span className="mb-3 block text-[1.2rem] font-bold leading-none sm:mb-4 sm:text-lg">Welcome to</span>
-              <span className="block">Ovichem Consult Limited</span>
+              <span className="mb-3 block text-[1.2rem] font-medium leading-none sm:mb-4 sm:text-lg">Welcome to</span>
+              <span className="block whitespace-nowrap text-[clamp(1.75rem,5.2vw,7.8rem)]">Ovichem Consult Limited</span>
             </motion.h1>
 
             {/* Strategic Subtitle */}
@@ -1558,9 +1565,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-
-
-
-
-
