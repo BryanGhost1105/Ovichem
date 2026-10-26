@@ -8,7 +8,7 @@ export function GET() {
 
 ## Company
 - Location: Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria
-- Email: ovichemconsultltd@yahoo.com
+- Email: info@ovichem.ng
 - Phone and WhatsApp: +234 816 802 7338
 - Service area: Warri, Delta State, and projects across Nigeria
 

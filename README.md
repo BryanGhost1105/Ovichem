@@ -1,14 +1,14 @@
 
 ### Contact form email setup
 
-The contact form sends messages through Yahoo SMTP to `ovichemconsultltd@yahoo.com`. Create a Yahoo App Password for the business mailbox, then add these environment variables in the Vercel project under **Settings > Environment Variables**:
+The contact form sends messages to `info@ovichem.ng` through Zoho Mail. Create an app-specific password for the `info@ovichem.ng` mailbox in Zoho Mail (use the mailbox password if Zoho does not require an app-specific password), then add these environment variables in the Vercel project under **Settings > Environment Variables**:
 
 ```text
-YAHOO_USER=ovichemconsultltd@yahoo.com
-YAHOO_APP_PASSWORD=your-yahoo-app-password
+ZOHO_SMTP_USER=info@ovichem.ng
+ZOHO_SMTP_APP_PASSWORD=your-zoho-app-password
 ```
 
-Set the variables for Production, save them, and redeploy the project. For local development, put the same variables in `.env.local` and restart the dev server. Never commit or expose the App Password in client-side code.
+The app connects to Zoho at `smtp.zoho.com` using SSL on port `465`. Add both variables for Production and redeploy the project. For local development, put them in `.env.local` and restart the dev server. Keep the password secret; never expose it in client-side code or commit it to the repository.
 # Ovichem Consult Ltd
 
 Official website and service portal for **Ovichem Consult Ltd** — Practical space and chemical treatment specialists based in Warri, Delta State, Nigeria.

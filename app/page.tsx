@@ -85,13 +85,13 @@ const engineeringImages = [
   imagePath('engineering/team (5).jpg'),
 ];
 const clientLogos = [
-  { name: 'ARCO', image: arcoLogo },
-  { name: 'Air Liquide', image: airLiquideLogo },
   { name: 'SEEPCO', image: seepcoLogo },
   { name: 'Inqential Energies', image: inqentialLogo },
-  { name: 'Dewayles Group of Companies', image: dewaylesLogo },
-  { name: 'Matrix', image: matrixLogo },
   { name: 'Nuway', image: nuwayLogo },
+  { name: 'Matrix', image: matrixLogo },
+  { name: 'ARCO', image: arcoLogo },
+  { name: 'Air Liquide', image: airLiquideLogo },
+  { name: 'Dewayles Group of Companies', image: dewaylesLogo },
   { name: 'OCI', image: ociLogo },
   { name: 'OPAC', image: opacLogo },
   { name: 'DEUX', image: deuxLogo },
@@ -229,7 +229,7 @@ export default function LandingPage() {
   const defaultPhoneNumber = '+234 07019121877';
   const secondaryPhoneNumber = '+234 08168027338';
   const tertiaryPhoneNumber = '+234 08051759119';
-  const defaultEmail = 'ovichemconsultltd@yahoo.com';
+  const defaultEmail = 'info@ovichem.ng';
   const officeAddress = 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.';
   const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(officeAddress)}&travelmode=driving`;
 
@@ -344,7 +344,7 @@ export default function LandingPage() {
             description:
               'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services based in Warri, Delta State, Nigeria.',
             telephone: '+2348168027338',
-            email: 'ovichemconsultltd@yahoo.com',
+            email: 'info@ovichem.ng',
             address: {
               '@type': 'PostalAddress',
               streetAddress: 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen',
