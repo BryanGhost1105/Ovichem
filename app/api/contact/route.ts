@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please provide valid contact details and a message.' }, { status: 400 });
     }
 
-    const recipient = 'info@ovichem.ng';
+    const recipients = ['info@ovichem.ng', 'ovichemconsultltd@yahoo.com'];
     const smtpUser = process.env.ZOHO_SMTP_USER;
     const smtpPassword = process.env.ZOHO_SMTP_APP_PASSWORD;
     if (!smtpUser || !smtpPassword) {
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
     await transporter.sendMail({
       from: `Ovichem website <${smtpUser}>`,
-      to: recipient,
+      to: recipients,
       replyTo: email,
       subject: `[Website enquiry] ${inquiryType} - ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nCompany: ${companyName}\nInquiry type: ${inquiryType}\n\nMessage:\n${message}`,

@@ -59,6 +59,9 @@ export default function PrivacyPolicyPage() {
               For privacy questions or requests, email{' '}
               <a className="font-semibold text-[#990909] hover:text-[#E4980B]" href="mailto:info@ovichem.ng">
                 info@ovichem.ng
+              </a>{' '}or{' '}
+              <a className="font-semibold text-[#990909] hover:text-[#E4980B]" href="mailto:ovichemconsultltd@yahoo.com">
+                ovichemconsultltd@yahoo.com
               </a>{' '}
               or write to Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.
             </p>

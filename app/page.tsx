@@ -230,6 +230,7 @@ export default function LandingPage() {
   const secondaryPhoneNumber = '+234 08168027338';
   const tertiaryPhoneNumber = '+234 08051759119';
   const defaultEmail = 'info@ovichem.ng';
+  const secondaryEmail = 'ovichemconsultltd@yahoo.com';
   const officeAddress = 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen, Effurun, Warri, Delta State, Nigeria.';
   const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(officeAddress)}&travelmode=driving`;
 
@@ -344,7 +345,7 @@ export default function LandingPage() {
             description:
               'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services based in Warri, Delta State, Nigeria.',
             telephone: '+2348168027338',
-            email: 'info@ovichem.ng',
+            email: [defaultEmail, secondaryEmail],
             address: {
               '@type': 'PostalAddress',
               streetAddress: 'Suite 1.03 Alfa Plaza, Opposite Coca Cola Depot, Enerhen Road, Enerhen',
@@ -663,7 +664,7 @@ export default function LandingPage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-22 sm:py-24 lg:py-28 w-full">
-          <div className="max-w-3xl lg:max-w-4xl space-y-5 sm:space-y-6">
+          <div className="max-w-3xl translate-y-3 space-y-5 sm:translate-y-4 sm:space-y-6 lg:max-w-4xl">
             
           
 
@@ -1324,10 +1325,14 @@ export default function LandingPage() {
                      <a href={`tel:${tertiaryPhoneNumber.replace(/\s+/g, '')}`} className="block hover:text-[#990909]">{tertiaryPhoneNumber}</a>
                   </span>
                 </div>
-                <a href={`mailto:${defaultEmail}`} className="flex items-start gap-3 transition-colors hover:text-[#990909]">
+                <div className="flex items-start gap-3">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
-                  <span><strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Email</strong>{defaultEmail}</span>
-                </a>
+                  <span>
+                    <strong className="block text-xs font-semibold uppercase tracking-wider text-[#786E64]">Email</strong>
+                    <a href={`mailto:${defaultEmail}`} className="block transition-colors hover:text-[#990909]">{defaultEmail}</a>
+                    <a href={`mailto:${secondaryEmail}`} className="block transition-colors hover:text-[#990909]">{secondaryEmail}</a>
+                  </span>
+                </div>
                 <div className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#E4980B]" />
                   <span>
@@ -1517,6 +1522,14 @@ export default function LandingPage() {
                     className="hover:text-[#E4980B] transition-colors"
                   >
                     {defaultEmail}
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href={`mailto:${secondaryEmail}`}
+                    className="hover:text-[#E4980B] transition-colors"
+                  >
+                    {secondaryEmail}
                   </a>
                 </p>
                 <p>
