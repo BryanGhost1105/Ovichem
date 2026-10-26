@@ -664,7 +664,7 @@ export default function LandingPage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-22 sm:py-24 lg:py-28 w-full">
-          <div className="max-w-3xl translate-y-3 space-y-5 sm:translate-y-4 sm:space-y-6 lg:max-w-4xl">
+          <div className="max-w-3xl translate-y-8 space-y-5 sm:translate-y-10 sm:space-y-6 lg:max-w-4xl">
             
           
 
