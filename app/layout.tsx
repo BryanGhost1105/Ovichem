@@ -19,10 +19,18 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: 'Ovichem Consult | Chemical, Environmental & Engineering',
+  title: 'Ovichem Consult | Chemical Supply & Water Treatment in Warri',
   description:
-    'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services in Warri, Delta State, Nigeria.',
-  alternates: siteUrl ? { canonical: '/' } : undefined,
+    'Ovichem Consult provides industrial and laboratory chemicals, water treatment, environmental monitoring, fumigation and engineering services in Warri, Delta State, Nigeria.',
+  alternates: { canonical: '/' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   icons: {
     icon: '/company-photos/logo-removebg-preview.png',
     apple: '/company-photos/logo-removebg-preview.png',
@@ -37,8 +45,9 @@ export const metadata: Metadata = {
     'engineering consultancy Delta State',
   ],
   openGraph: {
-    title: 'Ovichem Consult Ltd | Chemical, Environmental & Engineering Services in Warri',
-    description: 'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services in Warri, Delta State, Nigeria.',
+    title: 'Ovichem Consult | Chemical Supply & Water Treatment in Warri',
+    description:
+      'Ovichem Consult provides industrial and laboratory chemicals, water treatment, environmental monitoring, fumigation and engineering services in Warri, Delta State, Nigeria.',
     type: 'website',
     locale: 'en_NG',
     siteName: 'Ovichem Consult Ltd',
@@ -49,8 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ovichem Consult Ltd | Chemical, Environmental & Engineering Services in Warri',
-    description: 'Industrial and laboratory chemical supply, water treatment, environmental monitoring, fumigation, and engineering services in Warri, Delta State, Nigeria.',
+    title: 'Ovichem Consult | Chemical Supply & Water Treatment in Warri',
+    description:
+      'Ovichem Consult provides industrial and laboratory chemicals, water treatment, environmental monitoring, fumigation and engineering services in Warri, Delta State, Nigeria.',
     images: ['/company-photos/hero-images/team%20(2).jpg'],
   },
 };
@@ -64,4 +74,3 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     </html>
   );
 }
-
